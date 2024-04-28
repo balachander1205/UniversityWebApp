@@ -6,9 +6,14 @@ import com.api.university.service.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/api")
@@ -28,5 +33,10 @@ public class UniversityController {
                 universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
                 universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword());
         return ResponseEntity.ok(universityService.getAllUniversities());
+    }
+
+    @GetMapping("/universityDetails")
+    public String universityDetails(HttpSession httpSession, ModelMap modelMap, RedirectAttributes redir) {
+        return "university";
     }
 }
