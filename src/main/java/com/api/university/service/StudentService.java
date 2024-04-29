@@ -1,9 +1,16 @@
 package com.api.university.service;
 
+import com.api.university.entity.StudentEntity;
+import org.springframework.data.jpa.repository.Query;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 public interface StudentService {
     public void insertStudent(String universityname,String studentname, String location,
                                  String studentlocation, String phonenumber,String email, String feedback,
                                  Timestamp createdatetime);
+    public List<StudentEntity> getAllStudents();
+    public List<StudentEntity> getTotalStudents();
+    public List<StudentEntity> getActiveStudents();
 }

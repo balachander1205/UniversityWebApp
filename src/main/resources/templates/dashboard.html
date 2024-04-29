@@ -88,7 +88,7 @@
                     <div class="d-flex align-items-center">
                       <div class="subheader">Total Students</div>
                     </div>
-                    <div class="h1 mb-3">75%</div>
+                    <div class="h1 mb-3" id="total_students">0</div>
                       <div class="d-flex mb-2">                      
                         <div class="ms-auto">
                           <span class="text-green d-inline-flex align-items-center lh-1">
@@ -107,7 +107,7 @@
                     <div class="d-flex align-items-center">
                       <div class="subheader">Active Students</div>
                     </div>
-                    <div class="h1 mb-3">75%</div>
+                    <div class="h1 mb-3" id="total_active_students">75%</div>
                       <div class="d-flex mb-2">                      
                         <div class="ms-auto">
                           <span class="text-green d-inline-flex align-items-center lh-1">
@@ -126,7 +126,7 @@
                     <div class="d-flex align-items-center">
                       <div class="subheader">Total Appointments</div>
                     </div>
-                    <div class="h1 mb-3">75%</div>
+                    <div class="h1 mb-3" id="total_appointments">0</div>
                       <div class="d-flex mb-2">                      
                         <div class="ms-auto">
                           <span class="text-green d-inline-flex align-items-center lh-1">
@@ -1044,6 +1044,52 @@
       	})).render();
       });
       // @formatter:on
+    </script>
+
+    <script>
+
+        $(document).ready(function() {
+          $("#tbl_university").DataTable();
+          var testDataUrl = "/api/analytics"
+          loadData();
+          function loadData() {
+            $.ajax({
+              type: 'POST',
+              url: testDataUrl,
+              contentType: "text/plain",
+              dataType: 'json',
+              success: function (data) {
+                myJsonData = data;
+                populateDataTable(myJsonData);
+              },
+              error: function (e) {
+                console.log("There was an error with your request...");
+                console.log("error: " + JSON.stringify(e));
+              }
+            });
+          }
+
+          // populate the data table with JSON data
+          function populateDataTable(data) {
+            console.log("populating university data table...");
+            $("#tbl_university").DataTable().clear();
+            var length = data.length;
+            for(var i = 0; i < length; i++) {
+              var university = data[i];
+              $('#tbl_university').dataTable().fnAddData( [
+                university.universityname,
+                university.description,
+                university.location,
+                university.repname,
+                university.position,
+                university.admissionintake,
+                university.username,
+                university.password,
+              ]);
+            }
+          }
+        });
+
     </script>
   </body>
 </html>

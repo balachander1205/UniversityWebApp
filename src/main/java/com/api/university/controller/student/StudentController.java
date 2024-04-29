@@ -36,4 +36,9 @@ public class StudentController {
     public String studentDetails(HttpSession httpSession, ModelMap modelMap, RedirectAttributes redir) {
         return "students";
     }
+
+    @PostMapping("/getAllStudents")
+    public ResponseEntity getAllStudents(){
+        return ResponseEntity.ok(studentRepository.getAllStudents());
+    }
 }
