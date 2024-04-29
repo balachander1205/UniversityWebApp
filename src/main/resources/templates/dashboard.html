@@ -11,6 +11,10 @@
     <link href="/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
     <link href="/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
     <link href="/css/demo.min.css?1684106062" rel="stylesheet"/>
+
+    <script type="text/javascript" src="/js/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
+    <script src="/js/jquery.dataTables.min.js"></script>
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -107,7 +111,7 @@
                     <div class="d-flex align-items-center">
                       <div class="subheader">Active Students</div>
                     </div>
-                    <div class="h1 mb-3" id="total_active_students">75%</div>
+                    <div class="h1 mb-3" id="total_active_students">0</div>
                       <div class="d-flex mb-2">                      
                         <div class="ms-auto">
                           <span class="text-green d-inline-flex align-items-center lh-1">
@@ -1049,7 +1053,6 @@
     <script>
 
         $(document).ready(function() {
-          $("#tbl_university").DataTable();
           var testDataUrl = "/api/analytics"
           loadData();
           function loadData() {
@@ -1071,22 +1074,11 @@
 
           // populate the data table with JSON data
           function populateDataTable(data) {
+            console.log(data);
             console.log("populating university data table...");
-            $("#tbl_university").DataTable().clear();
-            var length = data.length;
-            for(var i = 0; i < length; i++) {
-              var university = data[i];
-              $('#tbl_university').dataTable().fnAddData( [
-                university.universityname,
-                university.description,
-                university.location,
-                university.repname,
-                university.position,
-                university.admissionintake,
-                university.username,
-                university.password,
-              ]);
-            }
+            $('#total_students').text(data.totalStudents);
+            $('#total_active_students').text(data.activeStudents);
+            $('#total_appointments').text(data.totalAppointments);
           }
         });
 
