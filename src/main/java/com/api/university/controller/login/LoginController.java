@@ -44,4 +44,9 @@ public class LoginController {
         }
         return ResponseEntity.ok(status);
     }
+
+    @RequestMapping("/home")
+    public String homePage(){
+        return "login";
+    }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserService {
     public UserEntity getUserDetails(String username);
+    public UserEntity findByEmail(String username);
 }

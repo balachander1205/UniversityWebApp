@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService {
     public UserEntity getUserDetails(String username) {
         return usersRepository.getUserDetails(username);
     }
+
+    @Override
+    public UserEntity findByEmail(String username) {
+        return usersRepository.findByEmail(username);
+    }
 }

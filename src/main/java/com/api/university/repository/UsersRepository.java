@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface UsersRepository extends CrudRepository<UserEntity, Long> {
     @Query("select data from UserEntity data where data.username=:username")
     public UserEntity getUserDetails(@Param("username") String username);
+    @Query("select data from UserEntity data where data.username=:username")
+    public UserEntity findByEmail(@Param("username") String email);
 }
