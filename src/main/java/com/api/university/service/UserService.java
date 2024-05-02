@@ -1,10 +1,10 @@
 package com.api.university.service;
 
-import com.api.university.entity.UserEntity;
+import com.api.university.entity.User;
 
 import java.util.List;
 
 public interface UserService {
-    public UserEntity getUserDetails(String username);
-    public UserEntity findByEmail(String username);
+    public void saveUser(User user);
+    public List<Object> isUserPresent(User user);
 }
