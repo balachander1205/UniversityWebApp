@@ -83,7 +83,16 @@
                       <option value="USER">USER</option>
                     </select>
                   </div>
-                  <button type="submit" class="btn btn-primary">Register</button> | <a th:href="@{|/login|}" th:text="'Log in'"></a>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button type="submit" class="col-md-12 btn btn-primary btn-success">Register</button>
+                    </div>
+                  </div><br>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a th:href="@{|/api/login|}" th:text="'Log in'" class="col-md-12 btn btn-primary"></a>
+                    </div>
+                  </div>
                   <span th:utext="${successMessage}"></span>
                   <div th:if="${bindingResult!=null && bindingResult.getAllErrors()!=null}">
                     <ul th:each="data : ${bindingResult.getAllErrors()}">

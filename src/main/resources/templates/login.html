@@ -53,6 +53,11 @@
         .was-validated .form-check-input:invalid~.form-check-label {
             color: #f54394
         }
+        img#img-logo {
+            width: 30%;
+            margin-left: 30%;
+            margin-right: auto;
+        }
     </style>
 </head>
 
@@ -63,9 +68,13 @@
         <div class="page-content page-container" id="page-content">
             <div class="padding">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card">
-                            <div class="card-header"><strong>Login to your account</strong></div>
+                            <div class="card-header">
+                                <div class="row col-md-12">
+                                    <img src="/img/img-logo.png" id="img-logo" style="align-items: center;text-align: center !important;margin-left: auto;">
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <form th:action="@{/api/login}" method="POST" class="form-signin">
                                     <div class="form-group"><label class="text-muted" for="exampleInputEmail1">Email address</label>
@@ -74,7 +83,16 @@
                                     <div class="form-group"><label class="text-muted" for="exampleInputPassword1">Password</label>
                                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" th:placeholder="Password" name="password">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="col-md-12 btn btn-primary btn-red">Login</button>
+                                        </div>
+                                    </div><br>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a th:href="@{|/api/register|}" th:text="'Signup'" class="col-md-12 btn btn-primary btn-success"></a>
+                                        </div>
+                                    </div>
                                     <div th:if="${param.error}"><p>Email or Password is invalid.</p></div> <br />
                                 </form>
                             </div>
