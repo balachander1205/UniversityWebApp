@@ -27,6 +27,23 @@
       .table-responsive {
           padding: 12px;
       }
+      .navbar-brand-image {
+         border-radius: 5px;
+      }
+      table#tbl_university > thead > tr > th {
+          background-color: #0e0d0d;
+          color: white;
+          font-family: sans-serif;
+          padding: 10px;
+          margin-top: 18px !important;
+      }
+      #tbl_university_wrapper, #tbl_university {
+          padding-top: 20px;
+      }
+      table.dataTable tbody tr {
+          background-color: #bdb7b73d;
+          border: navajowhite;
+      }
     </style>
   </head>
   <body>
@@ -39,8 +56,8 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
-              <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            <a href="/api/dashboardDetails">
+              <img src="/img/university-logo.jpg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
@@ -59,13 +76,9 @@
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                 <span class="avatar avatar-sm" style="background-image: url('/img/profile.png')"></span>
-                <div class="d-none d-xl-block ps-2">
-                  <div id="profile_name">Paweł Kuna</div>
-                  <div class="mt-1 small text-muted" id="profile_position">UI Designer</div>
-                </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="#" class="dropdown-item">Status</a>
+                <a href="/api/dashboardDetails" class="dropdown-item" id="profile_page"><span th:utext="${userId}"></a>
                 <a href="/api/profile" class="dropdown-item" id="profile_page">Profile</a>
                 <a href="/api/dashboardDetails" class="dropdown-item">Dashboard</a>
                 <div class="dropdown-divider"></div>

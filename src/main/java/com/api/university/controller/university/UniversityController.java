@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,7 +70,9 @@ public class UniversityController {
     }
 
     @GetMapping("/universityDetails")
-    public String universityDetails(HttpSession httpSession, ModelMap modelMap, RedirectAttributes redir) {
+    public String universityDetails(HttpSession httpSession, Model model, RedirectAttributes redir) {
+        String userId = httpSession.getAttribute("userId").toString();
+        model.addAttribute("userId",userId);
         return "university";
     }
 }
