@@ -52,7 +52,7 @@ public class WebSecurityConfig {
 
                 http.authorizeRequests()
                 // URL matching for accessibility
-                .antMatchers("/", "/api/login", "/api/register","/api/images/**", "/api/js/**", "/api/webjars/**","*/swagger-ui/**").permitAll()
+                .antMatchers("/", "/api/login", "/api/register","/api/images/**", "/api/js/**", "/api/webjars/**","*/swagger-ui/**", "/img/**", "/css/**").permitAll()
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/account/**").hasAnyAuthority("USER")
                 .anyRequest().authenticated()
@@ -81,7 +81,7 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
+        return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**", "/img/**", "/css/**");
     }
 
 }
