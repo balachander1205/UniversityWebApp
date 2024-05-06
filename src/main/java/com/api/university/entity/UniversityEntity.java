@@ -39,4 +39,10 @@ public class UniversityEntity
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "countrycode")
+    private String countrycode;
 }

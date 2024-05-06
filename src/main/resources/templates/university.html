@@ -171,6 +171,8 @@
                         <th>University Name</th>
                         <th>Description</th>
                         <th>Location</th>
+                        <th>state</th>
+                        <th>Country Code</th>
                         <th>Representative Name</th>
                         <th>Position</th>
                         <th>Admission Intakes</th>
@@ -342,11 +344,13 @@
                 university.universityname,
                 university.description,
                 university.location,
+                university.state,
+                university.countrycode,
                 university.repname,
                 university.position,
                 university.admissionintake,
                 university.username,
-                university.password,
+                university.password
               ]);
             }
             console.log(data.representatives);

@@ -7,20 +7,23 @@ import com.api.university.repository.UniversityRepository;
 import com.api.university.service.UniversityService;
 import com.api.university.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,5 +77,40 @@ public class UniversityController {
         String userId = httpSession.getAttribute("userId").toString();
         model.addAttribute("userId",userId);
         return "university";
+    }
+
+    @GetMapping("/dumpUniversityData")
+    @ResponseBody
+    public String dumpUniversityData() throws IOException {
+        saveUniversity();
+        return "OK";
+    }
+
+    public void saveUniversity() throws IOException, JSONException {
+        List<UniversityEntity> allUniversities = new ArrayList<>();
+        //allUniversities.add();
+        String data = readFromFileToString("/world_universities_and_domains.json");
+        JSONArray jsonObject = new JSONArray(data);
+        for(int i=0; i<jsonObject.length(); i++){
+            UniversityEntity universityEntity = new UniversityEntity();
+            JSONObject university = (JSONObject) jsonObject.get(i);
+            String country = university.getString("country");
+            String name = university.getString("name");
+            String alpha_two_code = university.getString("alpha_two_code");
+            //String state_province = university.getString("state_province")!=null?university.getString("state_province"):"";
+            universityEntity.setUniversityname(name);
+            universityEntity.setLocation(country);
+            universityEntity.setState("");
+            universityEntity.setCountrycode(alpha_two_code);
+            allUniversities.add(universityEntity);
+            System.out.println(university);
+        }
+        universityService.saveAll(allUniversities);
+    }
+
+    public static String readFromFileToString(String filePath) throws IOException {
+        File resource = new ClassPathResource(filePath).getFile();
+        byte[] byteArray = Files.readAllBytes(resource.toPath());
+        return new String(byteArray);
     }
 }
