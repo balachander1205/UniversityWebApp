@@ -1,4 +1,8 @@
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM maven:3.8.3-openjdk-17 AS build
+COPY ..
+RUN mvm clean package -DskipTests
+
+FROM openjdk:17-jdk-slim
+COPY --from=build /target/UniversityWebApp-0.0.1-SNAPSHOT.war UniversityWebApp.war
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","UniversityWebApp.war"]
