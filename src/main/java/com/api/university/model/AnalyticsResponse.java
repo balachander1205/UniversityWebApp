@@ -9,4 +9,5 @@ public class AnalyticsResponse {
     private int totalStudents;
     private int activeStudents;
     private int totalAppointments;
+    private int totalUniversities;
 }

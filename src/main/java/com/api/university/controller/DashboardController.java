@@ -2,9 +2,11 @@ package com.api.university.controller;
 
 import com.api.university.entity.AppointmentsEntity;
 import com.api.university.entity.StudentEntity;
+import com.api.university.entity.UniversityEntity;
 import com.api.university.model.AnalyticsResponse;
 import com.api.university.repository.AppointmentsRepository;
 import com.api.university.repository.StudentRepository;
+import com.api.university.repository.UniversityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class DashboardController {
     @Autowired
     AppointmentsRepository appointmentsRepository;
 
+    @Autowired
+    UniversityRepository universityRepository;
+
     @GetMapping("/dashboardDetails")
     public String dashboardDetails(HttpSession httpSession, Model model, RedirectAttributes redir) {
         log.info("dashboard:userId={}",httpSession.getAttribute("userId"));
@@ -47,11 +52,13 @@ public class DashboardController {
         List<StudentEntity> totalStudents = studentRepository.getTotalStudents();
         List<StudentEntity> activeStudents = studentRepository.getActiveStudents();
         List<AppointmentsEntity> totalAppointments = appointmentsRepository.getAllAppointments();
+        List<UniversityEntity> totalUniversities = universityRepository.getAllUniversities();
 
         AnalyticsResponse analyticsResponse = new AnalyticsResponse();
         analyticsResponse.setActiveStudents((activeStudents.size()));
         analyticsResponse.setTotalAppointments((totalAppointments.size()));
         analyticsResponse.setTotalStudents((totalStudents.size()));
+        analyticsResponse.setTotalUniversities(totalUniversities.size());
         log.info("JsonObject={}",analyticsResponse);
 
         ResponseEntity<AnalyticsResponse> entity = new ResponseEntity<>(analyticsResponse, HttpStatus.ACCEPTED);
