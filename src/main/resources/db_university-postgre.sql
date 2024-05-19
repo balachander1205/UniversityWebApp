@@ -75,4 +75,12 @@ ALTER TABLE appointments MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREME
 ALTER TABLE roles MODIFY id int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE students MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 ALTER TABLE university MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12336;
+
+INSERT INTO users (id, createddatetime, email, enabled, locked, mobile, password, role, updateddatetime, createtimestamp, username) VALUES
+(6, '2024-05-02 21:43:55', 'admin@gmail.com', '1', '0', '1234567890', '$2a$10$9Tk6MQGttWeAizvD52QlreneOYntv4MZxkCXnY7NQY5Hjnz4kqMQK', 'ADMIN', '2024-05-02 21:43:55', NULL, NULL);
+
+INSERT INTO users (id, createddatetime, email, enabled, locked, mobile, password, role, updateddatetime, createtimestamp, username) VALUES
+(5, '2024-05-02 21:43:55', 'balachander1205@gmail.com', '1', '0', '8919180283', '$2a$10$9Tk6MQGttWeAizvD52QlreneOYntv4MZxkCXnY7NQY5Hjnz4kqMQK', 'ADMIN', '2024-05-02 21:43:55', NULL, NULL);
+
 COMMIT;
+
