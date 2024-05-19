@@ -70,11 +70,60 @@ ALTER TABLE roles ADD PRIMARY KEY (id);
 ALTER TABLE students ADD PRIMARY KEY (id);
 ALTER TABLE university ADD PRIMARY KEY (id);
 
+-- University id:column auto increment
+CREATE SEQUENCE IF NOT EXISTS university_id_seq;
 
-ALTER TABLE appointments MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-ALTER TABLE roles MODIFY id int(11) NOT NULL AUTO_INCREMENT;
-ALTER TABLE students MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-ALTER TABLE university MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12336;
+SELECT SETVAL('university_id_seq', (
+  SELECT max(id) FROM university)
+);
+
+ALTER TABLE university
+ALTER COLUMN id
+SET DEFAULT nextval('university_id_seq'::regclass);
+
+ALTER SEQUENCE university_id_seq OWNED BY university.id;
+
+-- Student id:column auto increment
+CREATE SEQUENCE IF NOT EXISTS students_id_seq;
+
+SELECT SETVAL('students_id_seq', (
+  SELECT max(id) FROM students)
+);
+
+ALTER TABLE students
+ALTER COLUMN id
+SET DEFAULT nextval('students_id_seq'::regclass);
+
+ALTER SEQUENCE students_id_seq OWNED BY students.id;
+
+-- appointments id:column auto increment
+CREATE SEQUENCE IF NOT EXISTS appointments_id_seq;
+
+SELECT SETVAL('appointments_id_seq', (
+  SELECT max(id) FROM appointments)
+);
+
+ALTER TABLE appointments
+ALTER COLUMN id
+SET DEFAULT nextval('appointments_id_seq'::regclass);
+
+ALTER SEQUENCE appointments_id_seq OWNED BY appointments.id;
+
+-- Roles id:column auto increment
+CREATE SEQUENCE IF NOT EXISTS roles_id_seq;
+
+SELECT SETVAL('roles_id_seq', (
+  SELECT max(id) FROM roles)
+);
+
+ALTER TABLE roles
+ALTER COLUMN id
+SET DEFAULT nextval('roles_id_seq'::regclass);
+
+ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
+
+
+-- Default dashboard login user details ----
 
 INSERT INTO users (id, createddatetime, email, enabled, locked, mobile, password, role, updateddatetime, createtimestamp, username) VALUES
 (6, '2024-05-02 21:43:55', 'admin@gmail.com', '1', '0', '1234567890', '$2a$10$9Tk6MQGttWeAizvD52QlreneOYntv4MZxkCXnY7NQY5Hjnz4kqMQK', 'ADMIN', '2024-05-02 21:43:55', NULL, NULL);
@@ -83,4 +132,3 @@ INSERT INTO users (id, createddatetime, email, enabled, locked, mobile, password
 (5, '2024-05-02 21:43:55', 'balachander1205@gmail.com', '1', '0', '8919180283', '$2a$10$9Tk6MQGttWeAizvD52QlreneOYntv4MZxkCXnY7NQY5Hjnz4kqMQK', 'ADMIN', '2024-05-02 21:43:55', NULL, NULL);
 
 COMMIT;
-
