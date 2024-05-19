@@ -27,4 +27,7 @@ public interface AppointmentsRepository extends CrudRepository<AppointmentsEntit
 
     @Query(value = "select data from AppointmentsEntity data where data.repname=:repname")
     public List<AppointmentsEntity> getAppointmentsByRepname(@Param("repname") String repname);
+
+    @Query(value = "SELECT count(*) as count, appointmentdate  FROM db_university.appointments GROUP BY appointmentdate;", nativeQuery = true)
+    public List<Object> groupAppointmentsByDate();
 }

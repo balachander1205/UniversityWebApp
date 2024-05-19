@@ -8,5 +8,5 @@ public interface UniversityService {
     public List<UniversityEntity> getAllUniversities();
     public void insertUniversity(String universityname,String description, String location,
                                  String repname, String position, String admissionintake,
-                                 String username, String password);
+                                 String username, String password, String state);
 }

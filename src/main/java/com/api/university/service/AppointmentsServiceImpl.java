@@ -28,4 +28,8 @@ public class AppointmentsServiceImpl implements AppointmentsService {
     public List<AppointmentsEntity> getAppointmentsByRepname(String repname) {
         return appointmentsRepository.getAppointmentsByRepname(repname);
     }
+
+    public List<Object> groupAppointmentsByDate(){
+        return appointmentsRepository.groupAppointmentsByDate();
+    }
 }

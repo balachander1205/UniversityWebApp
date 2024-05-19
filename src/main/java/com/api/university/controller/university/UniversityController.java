@@ -58,7 +58,7 @@ public class UniversityController {
     public ResponseEntity addUniversity(@RequestBody UniversityModel universityModel){
         universityService.insertUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
                 universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
-                universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword());
+                universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState());
 
         List<UniversityEntity> allUniversities = universityService.getAllUniversities();
         UniversityResponseModel universityResponseModel = new UniversityResponseModel();
@@ -98,12 +98,14 @@ public class UniversityController {
             String name = university.getString("name");
             String alpha_two_code = university.getString("alpha_two_code");
             //String state_province = university.getString("state_province")!=null?university.getString("state_province"):"";
-            universityEntity.setUniversityname(name);
-            universityEntity.setLocation(country);
-            universityEntity.setState("");
-            universityEntity.setCountrycode(alpha_two_code);
-            allUniversities.add(universityEntity);
-            System.out.println(university);
+            if(alpha_two_code.equalsIgnoreCase("US")) {
+                universityEntity.setUniversityname(name);
+                universityEntity.setLocation(country);
+                universityEntity.setState("");
+                universityEntity.setCountrycode(alpha_two_code);
+                allUniversities.add(universityEntity);
+                System.out.println(university);
+            }
         }
         universityService.saveAll(allUniversities);
     }

@@ -206,13 +206,19 @@
             </div>
 
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <label class="form-label">University Name</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university">
               </div>
+            </div>
+            <div class="row">
               <div class="col-lg-6">
                 <label class="form-label">Location</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_location">
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">State</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_state">
               </div>
             </div>
 
@@ -371,6 +377,7 @@
             var location = $('#txt_location').val();
             var username = $('#txt_username').val();
             var password = $('#txt_username').val();
+            var state = $('#txt_state').val();
             var repname = $('#rep_names :selected').text();
             var checkboxValues = [];
             $('input[name="report-type"]:checked').map(function() {
@@ -385,7 +392,8 @@
                           "password": password,
                           "repname": repname,
                           "universityname": university,
-                          "username": username
+                          "username": username,
+                          "state":state
                         }
             saveUniversity();
             function saveUniversity() {
