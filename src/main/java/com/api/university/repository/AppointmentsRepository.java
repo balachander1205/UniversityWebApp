@@ -22,6 +22,9 @@ public interface AppointmentsRepository extends CrudRepository<AppointmentsEntit
     public void createAppointment(@Param("studentname") String studentname, @Param("repname") String repname, @Param("universityname") String universityname, @Param("location") String location,
                               @Param("appointmentdate") String appointmentdate, @Param("appointmentslot") String appointmentslot, @Param("createdatetime") Timestamp createdatetime);
 
+    @Query(value = "select data from AppointmentsEntity data where data.appointmentdate>=NOW()")
+    public List<AppointmentsEntity> getUpcomingAppointments();
+
     @Query(value = "select data from AppointmentsEntity data")
     public List<AppointmentsEntity> getAllAppointments();
 

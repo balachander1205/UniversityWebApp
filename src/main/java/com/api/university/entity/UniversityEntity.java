@@ -45,4 +45,7 @@ public class UniversityEntity
 
     @Column(name = "countrycode")
     private String countrycode;
+
+    @Column(name = "images")
+    private String images;
 }

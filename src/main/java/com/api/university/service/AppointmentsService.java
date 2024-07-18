@@ -13,6 +13,8 @@ public interface AppointmentsService {
 
     public List<AppointmentsEntity> getAllAppointments();
 
+    public List<AppointmentsEntity> getUpcomingAppointments();
+
     public List<AppointmentsEntity> getAppointmentsByRepname(String repname);
     public List<Object> groupAppointmentsByDate();
 }

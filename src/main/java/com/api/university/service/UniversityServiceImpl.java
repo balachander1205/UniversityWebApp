@@ -20,8 +20,8 @@ public class UniversityServiceImpl implements UniversityService {
 
     public void insertUniversity(String universityname, String description, String location,
                                  String repname, String position, String admissionintake,
-                                 String username, String password, String state) {
+                                 String username, String password, String state, String images) {
         universityRepository.insertUniversity(universityname, description, location,
-                repname, position, admissionintake, username, password, state);
+                repname, position, admissionintake, username, password, state, images);
     }
 }
