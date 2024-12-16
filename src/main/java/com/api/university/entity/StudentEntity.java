@@ -24,6 +24,8 @@ public class StudentEntity {
     private String studentlocation;
     @Column(name = "phonenumber")
     private String phonenumber;
+    @Column(name = "email")
+    private String email;
     @Column(name = "feedback")
     private String feedback;
     @Column(name = "createdatetime")
