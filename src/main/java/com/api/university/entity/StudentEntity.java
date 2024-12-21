@@ -32,4 +32,6 @@ public class StudentEntity {
     private String createdatetime;
     @Column(name = "activestatus")
     private String activestatus;
+    @Column(name = "passoutyear")
+    private String passoutyear;
 }

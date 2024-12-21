@@ -176,8 +176,10 @@
                         <th>Representative Name</th>
                         <th>Position</th>
                         <th>Admission Intakes</th>
+                        <th>Course Type</th>
                         <th>Username</th>
                         <th>Password</th>
+                        <th></th>
                       </tr>
                       </thead>
                     </table>
@@ -305,6 +307,117 @@
         </div>
       </div>
     </div>
+
+    <!-- university details modal window  -->
+    <div class="modal modal-blur fade" id="modal-report-university" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">University Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label" id="txt_uni_message" style="color:green"></label>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <label class="form-label">University Name</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university_name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_uni_location">
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">State</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_uni_state">
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="3" required="true" id="txt_uni_description"></textarea>
+              </div>
+            </div>
+
+            <label class="form-label">Admission Intakes</label>
+            <div class="form-selectgroup-boxes row mb-3">
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="report-type" value="Summer" class="form-selectgroup-input" checked>
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Summer</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="report-type" value="Spring" class="form-selectgroup-input">
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Spring</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="report-type" value="Fall" class="form-selectgroup-input" required>
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Fall</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="mb-6">
+                  <label class="form-label">Representative Names</label>
+                  <select class="form-select" id="txt_rep_names">
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_username">
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_password">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+              Cancel
+            </a>
+            <button type="button" class="btn btn-primary" id="btn_uni_save">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of university details modal window-->
     <!-- Libs JS -->
     <script src="/libs/apexcharts/dist/apexcharts.min.js?1684106062" defer></script>
     <script src="/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062" defer></script>
@@ -355,8 +468,10 @@
                 university.repname,
                 university.position,
                 university.admissionintake,
+                university.coursetype,
                 university.username,
-                university.password
+                university.password,
+                '<button class="btn btn-primary d-none d-sm-inline-block" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
               ]);
             }
             console.log(data.representatives);
@@ -368,6 +483,21 @@
             });
           }
           // Data table creation END -----
+
+          // onclick view button in university details table...
+          $('#btn-tr-view-data').click(function(){
+            var $row = $(this).closest("tr");
+            console.log($row);
+            var $tds = $row.find("td");
+            console.log($tds);
+            $('#txt_university_name').val($tds[0]);
+            $('#txt_uni_location').val($tds[2]);
+            $('#txt_university_name').val($tds[0]);
+            $('#txt_university_name').val($tds[0]);
+            $('#txt_university_name').val($tds[0]);
+            $('#modal-report-university').modal('show');
+          });
+          // End of View Details button...
 
           // onclick for save button in add university
           $('#btn_save').click(function(){
