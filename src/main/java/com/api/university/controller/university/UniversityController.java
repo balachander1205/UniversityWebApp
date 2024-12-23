@@ -4,6 +4,7 @@ import com.api.university.entity.UniversityEntity;
 import com.api.university.model.UniversityModel;
 import com.api.university.model.UniversityResponseModel;
 import com.api.university.repository.UniversityRepository;
+import com.api.university.service.RepresentativeService;
 import com.api.university.service.UniversityService;
 import com.api.university.utils.CommonUtils;
 import com.api.university.utils.Constants;
@@ -49,6 +50,9 @@ public class UniversityController {
     public String fileUploadLocation;
 
     @Autowired
+    RepresentativeService representativeService;
+
+    @Autowired
     CommonUtils commonUtils;
 
     @PostMapping("/getAllUniversities")
@@ -69,10 +73,24 @@ public class UniversityController {
 
     @PostMapping("/addUniversity")
     public ResponseEntity addUniversity(@RequestBody UniversityModel universityModel){
+        long currentTS = System.currentTimeMillis();
+        String universityID = String.valueOf(currentTS);
         universityService.insertUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
                 universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
-                universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), "");
-
+                universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), "",
+                universityModel.getCourse(), universityModel.getIsRecommended(), universityID);
+        if (universityModel.getRepresentatives() != null && universityModel.getRepresentatives().length() > 0) {
+            JSONArray reps = new JSONArray(universityModel.getRepresentatives());
+            System.out.println("Reps="+reps);
+            for (int i = 0; i < reps.length(); i++)
+            {
+                JSONObject jsonObject = reps.getJSONObject(i);
+                System.out.println("Rep="+jsonObject);
+                System.out.println("Availability="+jsonObject.getString("availability"));
+                representativeService.createRepresentative(jsonObject.getString("repName"), jsonObject.getString("username"),
+                        jsonObject.getString("phonenumber"), "", jsonObject.getString("username"), jsonObject.getString("password"), universityID , jsonObject.getString("availability"));
+            }
+        }
         List<UniversityEntity> allUniversities = universityService.getAllUniversities();
         UniversityResponseModel universityResponseModel = new UniversityResponseModel();
         universityResponseModel.setUniversities(allUniversities);
@@ -156,11 +174,13 @@ public class UniversityController {
             ObjectMapper objectMapper = new ObjectMapper();
             universityModel = objectMapper.readValue(university, UniversityModel.class);
             log.info("universityModel={}", universityModel);
-
+            long currentTS = System.currentTimeMillis();
+            String universityID = String.valueOf(currentTS);
 
             universityService.insertUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
                     universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
-                    universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), allImages);
+                    universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), allImages,
+                    universityModel.getCourse(), universityModel.getIsRecommended(), universityID);
 
             List<UniversityEntity> allUniversities = universityService.getAllUniversities();
             String homeURL = ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();

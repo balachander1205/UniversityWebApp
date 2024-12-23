@@ -2,6 +2,7 @@ package com.api.university.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.json.JSONArray;
 
 @Getter
 @Setter
@@ -15,4 +16,7 @@ public class UniversityModel {
     private String username;
     private String password;
     private String state;
+    private String course;
+    private String isRecommended;
+    private String representatives;
 }

@@ -12,9 +12,10 @@
     <link href="/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
     <link href="/css/demo.min.css?1684106062" rel="stylesheet"/>
 
-    <script type="text/javascript" src="/js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.js"></script>
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
     <script src="/js/jquery.dataTables.min.js"></script>
+<!--    <script src="/js/jquery.tabletojson.min.js"></script>-->
 
     <style>
       @import url('https://rsms.me/inter/inter.css');
@@ -177,8 +178,8 @@
                         <th>Position</th>
                         <th>Admission Intakes</th>
                         <th>Course Type</th>
-                        <th>Username</th>
-                        <th>Password</th>
+<!--                        <th>Username</th>-->
+<!--                        <th>Password</th>-->
                         <th></th>
                       </tr>
                       </thead>
@@ -273,25 +274,124 @@
                 </label>
               </div>
             </div>
+
+            <label class="form-label">Courses Offered</label>
+            <div class="form-selectgroup-boxes row mb-3">
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="course-type" value="Masters" class="form-selectgroup-input" checked>
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Masters</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="course-type" value="Bachelors" class="form-selectgroup-input">
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Bachelors</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="course-type" value="PG-Diplamo" class="form-selectgroup-input" required>
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">PG-Diplamo</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </div>
             <div class="row">
               <div class="col-lg-12">
                 <div class="mb-6">
-                  <label class="form-label">Representative Names</label>
-                  <select class="form-select" id="rep_names">
+                  <label class="form-label">Is Recommended University</label>
+                  <select class="form-select" id="uni_recommend">
+                    <option value="true" selected>FALSE</option>
+                    <option value="true">TRUE</option>
                   </select>
                 </div>
               </div>
             </div>
+<!--            <div class="row">-->
+<!--              <div class="col-lg-12">-->
+<!--                <div class="mb-6">-->
+<!--                  <label class="form-label">Representative Names</label>-->
+<!--                  <select class="form-select" id="rep_names">-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+            <!-- Add Representative form -->
             <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_username">
+              <div class="col-lg-3">
+                <label class="form-label">Representative Name</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Representative Name" id="txt_rep_name">
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_uname">
+              </div>
+              <div class="col-lg-3">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_password">
+                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_psd">
+              </div>
+              <div class="col-lg-3">
+                <label class="form-label">Phone Number</label>
+                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_phone">
+              </div>
+<!--              <div class="col-lg-3">-->
+<!--                <label class="form-label">Phone Number</label>-->
+<!--                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_availability">-->
+<!--              </div>-->
+              <div class="mb-3">
+                <label class="form-label">Availability</label>
+                <select class="form-select" id="rep_availability">
+                  <option value="8:00-5:00" selected>8:00-5:00</option>
+                  <option value="8:30-5:30" selected>8:30-5:30</option>
+                  <option value="9:00-6:00" selected>9:00-6:00</option>
+                  <option value="9:30-6:30" selected>9:30-6:30</option>
+                  <option value="10:00-7:00" selected>10:00-7:00</option>
+                </select>
+              </div>
+              <div class="col-lg-3">
+                <label class="form-label"></label>
+                <button class="btn btn-primary" id="btn_add_rep">Add</button>
               </div>
             </div>
+            <!-- Representative details table-->
+            <div class="row">
+              <div class="col-lg-12">
+                <table id="tbl_representative" class="table table-striped" style="width:100%">
+                  <thead>
+                  <tr>
+                    <th>repName</th>
+                    <th>username</th>
+                    <th>password</th>
+                    <th>phonenumber</th>
+                    <th>availability</th>
+                    <th>Info</th>
+                  </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <!-- End of Add Representative form -->
           </div>
           <div class="modal-footer">
             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
@@ -469,9 +569,9 @@
                 university.position,
                 university.admissionintake,
                 university.coursetype,
-                university.username,
-                university.password,
-                '<button class="btn btn-primary d-none d-sm-inline-block" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
+<!--                university.username,-->
+<!--                university.password,-->
+                '<button class="btn btn-primary" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
               ]);
             }
             console.log(data.representatives);
@@ -485,19 +585,41 @@
           // Data table creation END -----
 
           // onclick view button in university details table...
-          $('#btn-tr-view-data').click(function(){
+          $('#tbl_university').on('click','button',function(){
+            console.log("on click btn-tr-view-data...")
             var $row = $(this).closest("tr");
             console.log($row);
             var $tds = $row.find("td");
             console.log($tds);
-            $('#txt_university_name').val($tds[0]);
-            $('#txt_uni_location').val($tds[2]);
-            $('#txt_university_name').val($tds[0]);
-            $('#txt_university_name').val($tds[0]);
-            $('#txt_university_name').val($tds[0]);
+            $('#txt_university_name').val($tds[0].innerText);
+            $('#txt_uni_location').val($tds[2].innerText);
+            $('#txt_uni_state').val($tds[3].innerText);
+            $('#txt_uni_description').val($tds[1].innerText);
+            $('#txt_university_name').val($tds[0].innerText);
             $('#modal-report-university').modal('show');
           });
           // End of View Details button...
+
+          // onclick btn_add_rep Add button to add representative.
+          $('#btn_add_rep').click(function(){
+            console.log("On click ADD representative...");
+            var repName = $('#txt_rep_name').val();
+            var repUserName = $('#txt_rep_uname').val();
+            var repPsd = $('#txt_rep_psd').val();
+            var repPhone = $('#txt_rep_phone').val();
+            var repAvailability = $('#rep_availability').find(":selected").val();
+            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><button class="btn btn-danger" id="btn_remove_rep">Remove</button></td></tr>';
+            $('#tbl_representative').append(data_tr);
+            $('#txt_rep_name').val('');
+            $('#txt_rep_uname').val('');
+            $('#txt_rep_psd').val('');
+          });
+
+          // btn_remove_rep onclick remove representative from table row.
+          $('#tbl_representative').on('click', 'button#btn_remove_rep', function(){
+            console.log("on click btn_remove_rep...")
+            var $row = $(this).closest("tr").remove();
+          });
 
           // onclick for save button in add university
           $('#btn_save').click(function(){
@@ -511,19 +633,42 @@
             var repname = $('#rep_names :selected').text();
             var checkboxValues = [];
             $('input[name="report-type"]:checked').map(function() {
-                        checkboxValues.push($(this).val());
+                checkboxValues.push($(this).val());
             });
-            console.log(university, description, location, username, password, checkboxValues);
+            var courseTypeValues = [];
+            $('input[name="course-type"]:checked').map(function() {
+                courseTypeValues.push($(this).val());
+            });
+            var isRecommended = $('#uni_recommend').find(":selected").val();
+            // convert representative table into json
+            var header = [];
+            var rows = [];
+            $("#tbl_representative thead tr th").each(function (i, th) {
+                header.push($(th).html());
+            });
+            $("#tbl_representative tr:has(td)").each(function (i, tr) {
+                var row = {};
+                $(tr).find('td').each(function (j, td) {
+                    row[header[j]] = $(td).html();
+                });
+                rows.push(row);
+            });
+            console.log('Table Rows:', rows);
+            console.log(JSON.stringify(rows));
+            console.log(university, description, location, username, password, checkboxValues, courseTypeValues);
 
             var payload = {
                           "admissionintake": checkboxValues.toString(),
                           "description": description,
                           "location": location,
                           "password": password,
-                          "repname": repname,
+                          "repname": "",
                           "universityname": university,
                           "username": username,
-                          "state":state
+                          "state":state,
+                          "course":courseTypeValues.toString(),
+                          "isRecommended": isRecommended.toString(),
+                          "representatives":JSON.stringify(rows)
                         }
             saveUniversity();
             function saveUniversity() {
