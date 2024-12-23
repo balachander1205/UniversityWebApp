@@ -45,6 +45,10 @@
           background-color: #bdb7b73d;
           border: navajowhite;
       }
+      table#tbl_representative > thead > tr > th {
+          background: #0e0d0d;
+          color: white;
+      }
     </style>
   </head>
   <body>
@@ -353,7 +357,7 @@
               </div>
               <div class="col-lg-3">
                 <label class="form-label">Phone Number</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_phone">
+                <input type="text" class="form-control" name="example-text-input" placeholder="Phone Number" id="txt_rep_phone">
               </div>
 <!--              <div class="col-lg-3">-->
 <!--                <label class="form-label">Phone Number</label>-->
@@ -373,7 +377,7 @@
                 <label class="form-label"></label>
                 <button class="btn btn-primary" id="btn_add_rep">Add</button>
               </div>
-            </div>
+            </div><br>
             <!-- Representative details table-->
             <div class="row">
               <div class="col-lg-12">
@@ -608,7 +612,7 @@
             var repPsd = $('#txt_rep_psd').val();
             var repPhone = $('#txt_rep_phone').val();
             var repAvailability = $('#rep_availability').find(":selected").val();
-            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><button class="btn btn-danger" id="btn_remove_rep">Remove</button></td></tr>';
+            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">Remove</button></div></td></tr>';
             $('#tbl_representative').append(data_tr);
             $('#txt_rep_name').val('');
             $('#txt_rep_uname').val('');
