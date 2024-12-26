@@ -1,11 +1,11 @@
 package com.api.university.controller.university;
 
+import com.api.university.entity.RepresentativeEntity;
 import com.api.university.entity.UniversityEntity;
 import com.api.university.model.UniversityModel;
 import com.api.university.model.UniversityResponseModel;
 import com.api.university.repository.UniversityRepository;
 import com.api.university.service.RepresentativeService;
-import com.api.university.service.UniversityService;
 import com.api.university.utils.CommonUtils;
 import com.api.university.utils.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -36,7 +35,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/api")
@@ -56,18 +54,35 @@ public class UniversityController {
     CommonUtils commonUtils;
 
     @PostMapping("/getAllUniversities")
-    public ResponseEntity getAllUniversities(){
+    public ResponseEntity getAllUniversities() {
         List<UniversityEntity> allUniversities = universityService.getAllUniversities();
+        String homeURL = ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();
         UniversityResponseModel universityResponseModel = new UniversityResponseModel();
         universityResponseModel.setUniversities(allUniversities);
-        Map arrayList = new HashMap();
-        allUniversities.forEach((entity)->{
-            arrayList.put(entity.getRepname(), entity.getRepname());
+        universityResponseModel.getUniversities().stream().forEach(data -> {
+            List<String> imagesList = new ArrayList<>();
+            // Get representatives of university
+            if (data.getUniversityid() != null) {
+                List<RepresentativeEntity> reps = representativeService.getRepresentativeByUniversityId(data.getUniversityid());
+                data.setRepresentativeEntities(reps);
+            }
+            if (data.getImages() != null) {
+                if (data.getImages() != null && data.getImages().length() > 0 && data.getImages().contains(",")) {
+                    String[] images = data.getImages().split(",");
+                    Arrays.stream(images).forEach(img -> {
+                        //String actualImage = homeURL + "/api/images/" + img;
+                        String actualImage = img;
+                        imagesList.add(actualImage);
+                    });
+                } else {
+                    //String actualImage = homeURL + "/api/images/" + data.getImages();
+                    String actualImage = data.getImages();
+                    imagesList.add(actualImage);
+                }
+                data.setImages(StringUtils.join(imagesList, ','));
+            }
         });
-        log.info("reps={}",arrayList);
-        //List<String> representatives = universityService.getAllUniversities().stream().map(UniversityEntity :: getRepname).collect(Collectors.toList());
-        universityResponseModel.setRepresentatives(arrayList);
-        log.info("universityResponseModel={}",universityResponseModel);
+        log.info("universityResponseModel={}", universityResponseModel);
         return ResponseEntity.ok(universityResponseModel);
     }
 

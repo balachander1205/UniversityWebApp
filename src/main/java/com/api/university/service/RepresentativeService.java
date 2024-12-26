@@ -12,4 +12,5 @@ public interface RepresentativeService {
                                      String profilepic, String username, String password, String universityID, String availability);
     public RepresentativeEntity getRepresentativeByUsername( String username);
     public RepresentativeEntity getRepresentativeByEmail(String email);
+    public List<RepresentativeEntity> getRepresentativeByUniversityId(String universityID);
 }

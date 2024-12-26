@@ -49,6 +49,13 @@
           background: #0e0d0d;
           color: white;
       }
+      table#tbl_representative_details > tr:nth-child(odd),
+      table#tbl_representative > tr:nth-child(odd) {
+          background: #d9d9d9;
+      }table#tbl_representative_details>thead>tr>th {
+          background: #000000c9;
+          color: white;
+      }
     </style>
   </head>
   <body>
@@ -173,17 +180,16 @@
                     <table id="tbl_university" class="table table-striped" style="width:100%">
                       <thead>
                       <tr>
+                        <th>University ID</th>
                         <th>University Name</th>
                         <th>Description</th>
                         <th>Location</th>
                         <th>state</th>
                         <th>Country Code</th>
-                        <th>Representative Name</th>
+                        <th>Recommended</th>
                         <th>Position</th>
                         <th>Admission Intakes</th>
                         <th>Course Type</th>
-<!--                        <th>Username</th>-->
-<!--                        <th>Password</th>-->
                         <th></th>
                       </tr>
                       </thead>
@@ -330,16 +336,6 @@
                     <option value="true">TRUE</option>
                   </select>
                 </div>
-                <div class="mb-6">
-                  <label class="form-label">Availability</label>
-                  <select class="form-select" id="rep_availability">
-                    <option value="8:00-5:00" selected>8:00-5:00</option>
-                    <option value="8:30-5:30" selected>8:30-5:30</option>
-                    <option value="9:00-6:00" selected>9:00-6:00</option>
-                    <option value="9:30-6:30" selected>9:30-6:30</option>
-                    <option value="10:00-7:00" selected>10:00-7:00</option>
-                  </select>
-                </div>
               </div>
             </div>
 <!--            <div class="row">-->
@@ -353,24 +349,39 @@
 <!--            </div>-->
             <!-- Add Representative form -->
             <div class="row">
-              <div class="col-lg-3">
+              <div class="col-lg-4">
                 <label class="form-label">Representative Name</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="Representative Name" id="txt_rep_name">
               </div>
-              <div class="col-lg-3">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_uname">
-              </div>
-              <div class="col-lg-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_psd">
-              </div>
-              <div class="col-lg-3">
+              <div class="col-lg-4">
                 <label class="form-label">Phone Number</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="Phone Number" id="txt_rep_phone">
               </div>
+              <div class="col-lg-4">
+                <label class="form-label">Availability</label>
+                <select class="form-select" id="rep_availability">
+                  <option value="8:00-5:00" selected>8:00-5:00</option>
+                  <option value="8:30-5:30" selected>8:30-5:30</option>
+                  <option value="9:00-6:00" selected>9:00-6:00</option>
+                  <option value="9:30-6:30" selected>9:30-6:30</option>
+                  <option value="10:00-7:00" selected>10:00-7:00</option>
+                </select>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_uname">
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_psd">
+              </div>
 
-              <div class="col-lg-3">
+<!--              <div class="col-lg-3">-->
+<!--                <label class="form-label">Phone Number</label>-->
+<!--                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_availability">-->
+<!--              </div>-->
+
+              <div class="col-lg-4">
                 <label class="form-label"></label>
                 <button class="btn btn-primary" id="btn_add_rep">Add</button>
               </div>
@@ -423,6 +434,12 @@
               <label class="form-label" id="txt_uni_message" style="color:green"></label>
             </div>
 
+            <div class="row">
+              <div class="col-lg-12">
+                <label class="form-label">University ID</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university_id" disabled>
+              </div>
+            </div>
             <div class="row">
               <div class="col-lg-12">
                 <label class="form-label">University Name</label>
@@ -489,25 +506,85 @@
                 </label>
               </div>
             </div>
+
+            <label class="form-label">Courses</label>
+            <div class="form-selectgroup-boxes row mb-3">
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="uni-report-type" id="uni-report-type" value="Masters" class="form-selectgroup-input" checked>
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Masters</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="uni-report-type" id="uni-report-type" value="Bachelors" class="form-selectgroup-input">
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Bachelors</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-selectgroup-item">
+                  <input type="checkbox" name="uni-report-type" id="uni-report-type" value="PG-Diploma" class="form-selectgroup-input" required>
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">PG-Diploma</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </div>
+<!--            <div class="row">-->
+<!--              <div class="col-lg-12">-->
+<!--                <div class="mb-6">-->
+<!--                  <label class="form-label">Representative Names</label>-->
+<!--                  <select class="form-select" id="txt_rep_names">-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--              <div class="col-lg-6">-->
+<!--                <label class="form-label">Username</label>-->
+<!--                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_username">-->
+<!--              </div>-->
+<!--              <div class="col-lg-6">-->
+<!--                <label class="form-label">Password</label>-->
+<!--                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_password">-->
+<!--              </div>-->
+<!--            </div>-->
+            <!-- Representative details table-->
             <div class="row">
               <div class="col-lg-12">
-                <div class="mb-6">
-                  <label class="form-label">Representative Names</label>
-                  <select class="form-select" id="txt_rep_names">
-                  </select>
-                </div>
+                <table id="tbl_representative_details" class="table table-striped" style="width:100%">
+                  <thead>
+                  <tr>
+                    <th>repName</th>
+                    <th>username</th>
+<!--                    <th>password</th>-->
+                    <th>phonenumber</th>
+                    <th>availability</th>
+                  </tr>
+                  </thead>
+                </table>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_username">
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_password">
-              </div>
-            </div>
+            <!-- End of Add Representative form -->
           </div>
           <div class="modal-footer">
             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
@@ -561,12 +638,13 @@
             for(var i = 0; i < length; i++) {
               var university = data.universities[i];
               $('#tbl_university').dataTable().fnAddData( [
+                university.universityid,
                 university.universityname,
                 university.description,
                 university.location,
                 university.state,
                 university.countrycode,
-                university.repname,
+                university.isrecommended,
                 university.position,
                 university.admissionintake,
                 university.coursetype,
@@ -592,14 +670,71 @@
             console.log($row);
             var $tds = $row.find("td");
             console.log($tds);
-            $('#txt_university_name').val($tds[0].innerText);
-            $('#txt_uni_location').val($tds[2].innerText);
-            $('#txt_uni_state').val($tds[3].innerText);
-            $('#txt_uni_description').val($tds[1].innerText);
-            $('#txt_university_name').val($tds[0].innerText);
+            var universityId = $tds[0].innerText;
+            $('#txt_university_id').val(universityId);
+            $('#txt_university_name').val($tds[1].innerText);
+            $('#txt_uni_location').val($tds[3].innerText);
+            $('#txt_uni_state').val($tds[4].innerText);
+            $('#txt_uni_description').val($tds[2].innerText);
             $('#modal-report-university').modal('show');
+
+            // Clear all check boxes
+            $("input[name='report-type']").each(function() { this.checked = false; });
+            $("input[name='uni-report-type']").each(function() { this.checked = false; });
+
+            // set selected values in checkbox for admissions intake
+            var admissionintake = $tds[8].innerText;
+            var admissions = admissionintake.split(',');
+            console.log(admissions);
+            $(admissions).each(function(i, item){
+                console.log(item);
+                $("input[name='report-type']").each(function(e){
+                    if($(this).val() == item){
+                        $(this).prop("checked", true);
+                    }
+                });
+            });
+
+            // set selected values in checkbox for courses offered
+            var courseType = $tds[9].innerText;
+            var courses = courseType.split(',');
+            console.log(courses);
+            $(courses).each(function(i, item){
+                console.log(item);
+                $("input[name='uni-report-type']").each(function(e){
+                    if($(this).val() == item){
+                        $(this).prop("checked", true);
+                    }
+                });
+            });
+            // populate representatives table in modal window
+            getRepresentativeByUniversityId(universityId);
+
           });
           // End of View Details button...
+
+          // get representatives by universityID
+          function getRepresentativeByUniversityId(universityId) {
+            console.log("Inside saveUniversity...")
+            $('#tbl_representative_details > tr').remove();
+            $.ajax({
+              type: 'POST',
+              url: '/api/getRepresentativeByUniversityId?universityId='+universityId,
+              contentType: "application/json",
+              dataType: 'json',
+              success: function (data) {
+                $(data).each(function(i, item){
+                    var data_tr = '<tr><td>'+item.repname+'</td><td>'+item.username+'</td><td>'+item.phonenumber+'</td><td>'+item.availability+'</td></tr>';
+                    $('#tbl_representative_details').append(data_tr);
+
+                });
+              },
+              error: function (e) {
+                console.log("There was an error inside getRepresentativeByUniversityId...");
+                console.log("error: " + JSON.stringify(e));
+              }
+            });
+          }
 
           // onclick btn_add_rep Add button to add representative.
           $('#btn_add_rep').click(function(){
@@ -684,6 +819,8 @@
                   myJsonData = data;
                   console.log(data);
                   $('#txt_message').html(data.message);
+                  alert(data.message);
+                  $('#modal-report').modal('hide');
                 },
                 error: function (e) {
                   console.log("There was an error inside saveUniversity...");
