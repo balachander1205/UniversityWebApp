@@ -12,3 +12,6 @@ div#div-card-body {
 .card-body {
     border-top: 3px solid #206bc4;
 }
+li.nav-item.active {
+    background: #206bc438;
+}
