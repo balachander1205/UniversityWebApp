@@ -2,8 +2,12 @@
     background: #206bc429;
 }
 div#div-card-body {
-    background: #d3e1f3;
+    background: #206bc4;
     border-top: 3px solid #206bc4;
+    color: white;
+}
+.subheader {
+    color: white;
 }
 .card-body {
     border-top: 3px solid #206bc4;
