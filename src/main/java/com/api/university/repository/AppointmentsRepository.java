@@ -33,4 +33,7 @@ public interface AppointmentsRepository extends CrudRepository<AppointmentsEntit
 
     @Query(value = "SELECT count(*) as count, appointmentdate  FROM db_university.appointments GROUP BY appointmentdate;", nativeQuery = true)
     public List<Object> groupAppointmentsByDate();
+
+    @Query(value = "SELECT COUNT(*) AS appointments, appointmentdate AS count_date FROM appointments a GROUP BY appointmentdate ORDER BY appointmentdate", nativeQuery = true)
+    public List<Object[]> countAppointmentsByDate();
 }

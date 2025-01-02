@@ -37,4 +37,9 @@ public class AppointmentsServiceImpl implements AppointmentsService {
     public List<Object> groupAppointmentsByDate(){
         return appointmentsRepository.groupAppointmentsByDate();
     }
+
+    @Override
+    public List<Object[]> countAppointmentsByDate() {
+        return appointmentsRepository.countAppointmentsByDate();
+    }
 }

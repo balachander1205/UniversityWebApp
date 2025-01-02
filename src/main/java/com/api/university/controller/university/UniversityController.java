@@ -103,7 +103,7 @@ public class UniversityController {
                 System.out.println("Rep="+jsonObject);
                 System.out.println("Availability="+jsonObject.getString("availability"));
                 representativeService.createRepresentative(jsonObject.getString("repName"), jsonObject.getString("username"),
-                        jsonObject.getString("phonenumber"), "", jsonObject.getString("username"), jsonObject.getString("password"), universityID , jsonObject.getString("availability"));
+                        jsonObject.getString("phonenumber"), "https://cdn-icons-png.flaticon.com/512/4042/4042171.png", jsonObject.getString("username"), jsonObject.getString("password"), universityID , jsonObject.getString("availability"));
             }
         }
         List<UniversityEntity> allUniversities = universityService.getAllUniversities();
