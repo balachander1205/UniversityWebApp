@@ -1,0 +1,10 @@
+.navbar-collapse .navbar {
+    background: #206bc429;
+}
+div#div-card-body {
+    background: #d3e1f3;
+    border-top: 3px solid #206bc4;
+}
+.card-body {
+    border-top: 3px solid #206bc4;
+}
