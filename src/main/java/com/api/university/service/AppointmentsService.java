@@ -18,4 +18,5 @@ public interface AppointmentsService {
     public List<AppointmentsEntity> getAppointmentsByRepname(String repname);
     public List<Object> groupAppointmentsByDate();
     public List<Object[]> countAppointmentsByDate();
+    public List<Object[]> countAppointmentsByUniversityDate();
 }

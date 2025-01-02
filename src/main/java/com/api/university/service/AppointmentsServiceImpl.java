@@ -42,4 +42,9 @@ public class AppointmentsServiceImpl implements AppointmentsService {
     public List<Object[]> countAppointmentsByDate() {
         return appointmentsRepository.countAppointmentsByDate();
     }
+
+    @Override
+    public List<Object[]> countAppointmentsByUniversityDate() {
+        return appointmentsRepository.countAppointmentsByUniversityDate();
+    }
 }

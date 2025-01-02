@@ -17,5 +17,7 @@ public class AnalyticsResponse {
     private int activeStudents;
     private int totalAppointments;
     private int totalUniversities;
+    private int totalRepresentatives;
     private Map<String, ArrayList> totalAppointmentsByDate;
+    private Map<String, ArrayList> countAppointmentsByUniversityDate;
 }

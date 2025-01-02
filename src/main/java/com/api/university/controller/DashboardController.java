@@ -1,12 +1,14 @@
 package com.api.university.controller;
 
 import com.api.university.entity.AppointmentsEntity;
+import com.api.university.entity.RepresentativeEntity;
 import com.api.university.entity.StudentEntity;
 import com.api.university.entity.UniversityEntity;
 import com.api.university.model.AnalyticsResponse;
 import com.api.university.repository.AppointmentsRepository;
 import com.api.university.repository.StudentRepository;
 import com.api.university.repository.UniversityRepository;
+import com.api.university.service.RepresentativeService;
 import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -46,6 +48,9 @@ public class DashboardController {
     @Autowired
     UniversityRepository universityRepository;
 
+    @Autowired
+    RepresentativeService representativeService;
+
     @GetMapping("/dashboardDetails")
     public String dashboardDetails(HttpSession httpSession, Model model, RedirectAttributes redir) {
         log.info("dashboard:userId={}",httpSession.getAttribute("userId"));
@@ -62,12 +67,17 @@ public class DashboardController {
         List<AppointmentsEntity> totalAppointments = appointmentsRepository.getAllAppointments();
         List<UniversityEntity> totalUniversities = universityRepository.getAllUniversities();
         List<Object[]> totalAppointmentsByDate = appointmentsRepository.countAppointmentsByDate();
+        List<RepresentativeEntity> totalRepresentatives = representativeService.getAllRepresentatives();
+        List<Object[]> countAppointmentsByUniversityDate = appointmentsRepository.countAppointmentsByUniversityDate();
 
         AnalyticsResponse analyticsResponse = new AnalyticsResponse();
         analyticsResponse.setActiveStudents((activeStudents.size()));
         analyticsResponse.setTotalAppointments((totalAppointments.size()));
         analyticsResponse.setTotalStudents((totalStudents.size()));
         analyticsResponse.setTotalUniversities(totalUniversities.size());
+        analyticsResponse.setTotalRepresentatives(totalRepresentatives.size());
+
+        // Process appointments by date
         if(totalAppointmentsByDate.size()>0) {
             ArrayList count = new ArrayList();
             ArrayList date = new ArrayList();
@@ -84,6 +94,29 @@ public class DashboardController {
             totalAppointmentsByDateObj.put("dates", date);
             System.out.println("totalAppointmentsByDateObj: " + totalAppointmentsByDateObj);
             analyticsResponse.setTotalAppointmentsByDate(totalAppointmentsByDateObj);
+        }
+
+        // Process appointments by date and university
+        if(countAppointmentsByUniversityDate.size()>0) {
+            ArrayList count = new ArrayList();
+            ArrayList date = new ArrayList();
+            ArrayList universities = new ArrayList();
+            for (Object[] result : countAppointmentsByUniversityDate) {
+                BigInteger appointmentsCount = (BigInteger) result[0];
+                String university = (String) result[1];
+                java.sql.Date countDate = (java.sql.Date) result[2];
+                count.add(appointmentsCount);
+                date.add(countDate);
+                universities.add(university);
+                System.out.println("Date: " + countDate + " | Appointments: " + appointmentsCount);
+            }
+            //JSONObject totalAppointmentsByDateObj = new JSONObject();
+            Map<String, ArrayList> totalAppointmentsByDateObj = new HashMap<>();
+            totalAppointmentsByDateObj.put("count", count);
+            totalAppointmentsByDateObj.put("dates", date);
+            totalAppointmentsByDateObj.put("universities", universities);
+            System.out.println("totalAppointmentsByDateObj: " + totalAppointmentsByDateObj);
+            analyticsResponse.setCountAppointmentsByUniversityDate(totalAppointmentsByDateObj);
         }
         log.info("JsonObject={}",analyticsResponse);
         ResponseEntity<AnalyticsResponse> entity = new ResponseEntity<>(analyticsResponse, HttpStatus.ACCEPTED);
