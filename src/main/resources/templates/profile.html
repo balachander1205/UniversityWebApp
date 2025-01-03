@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>Profile</title>
     <!-- CSS files -->
     <link href="/css/tabler.min.css?1684106062" rel="stylesheet"/>
     <link href="/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
     <script src="/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="/css/custom.css">
-
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -25,30 +24,27 @@
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
-      .table-responsive {
-            padding: 12px;
-      }
       .navbar-brand-image {
          border-radius: 5px;
       }
-      table#tbl_student > thead > tr > th {
-          background-color: #206bc4;
-          color: white;
-          font-family: sans-serif;
-          padding: 10px;
-          margin-top: 18px !important;
+      #img-profile {
+          background: #206bc4;
+          padding: 24px;
+          /* height: 200px; */
+          border-radius: 100%;
       }
-      #tbl_student_wrapper, #tbl_student {
-          padding-top: 20px;
+      #div_profile {
+        background-color: white;
+        padding: 20px;
+        margin: 30px;
+        border-top: 3px solid #206bc4;
       }
-      table.dataTable tbody tr {
-          background-color: #bdb7b73d;
-          border: navajowhite;
+      #div-profile-info {
+          padding-top: 50px;
       }
     </style>
   </head>
   <body >
-<!--    <script src="./dist/js/demo-theme.min.js?1684106062"></script>-->
     <script src="/js/demo-theme.min.js?1684106062"></script>
     <div class="page">
       <!-- Navbar -->
@@ -58,7 +54,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="/api/dashboardDetails">
+            <a href="/api/profile">
               <img src="/img/university-logo.jpg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
           </h1>
@@ -66,12 +62,10 @@
             <div class="d-none d-md-flex">
               <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip"
                  data-bs-placement="bottom">
-                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
               </a>
               <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode" data-bs-toggle="tooltip"
                  data-bs-placement="bottom">
-                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>
               </a>
             </div>
@@ -117,7 +111,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="./appointmentDetails" >
                     <span class="nav-link-title">
                       Appointments
@@ -137,119 +131,63 @@
               <div class="col">
                 <!-- Page pre-title -->
                 <h2 class="page-title">
-                  Appointment Details
+                  Profile
                 </h2>
               </div>
-              <!-- Page title actions -->
             </div>
           </div>
         </div>
         <!-- Page body -->
-        <div class="page-body">
+        <div class="page-body" id="div_profile">
           <div class="container-xl">
-            <div class="row row-deck row-cards">
-              <div class="col-12">
-                <div class="card">
-
-                  <div class="table-responsive">
-
-                    <table id="tbl_student" class="table table-striped" style="width:100%">
-                      <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Student Name</th>
-                        <th>Rep Name</th>
-                        <th>University Name</th>
-                        <th>Location</th>
-                        <th>Appointment Date</th>
-                        <th>Appointment Slot</th>
-                        <th>Creation Date</th>
-                        <th>Phone Number</th>
-                        <th></th>
-                      </tr>
-                      </thead>
-                    </table>
-
+              <div class="row">
+                <div class="col-lg-2" id="img-profile">
+                  <img class="" src="/images/4042260.png">
+                </div>
+                <div class="col-lg-10" id="div-profile-info">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <label class="form-label">ID</label>
+                      <input type="text" class="form-control" name="example-text-input" required id="txt_id" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                      <label class="form-label">Email</label>
+                      <input type="text" class="form-control" name="example-text-input"  required id="txt_email" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                      <label class="form-label">Role</label>
+                      <input type="text" class="form-control" name="example-text-input"  required id="txt_role" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                      <label class="form-label">Username</label>
+                      <input type="text" class="form-control" name="example-text-input"  required id="txt_username" disabled>
+                    </div>
+                  </div><br><br>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <label class="form-label">created Date</label>
+                      <input type="text" class="form-control" name="example-text-input" required id="txt_created_date" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                      <label class="form-label">Last Updated Date</label>
+                      <input type="text" class="form-control" name="example-text-input"  required id="txt_updated_date" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                      <label class="form-label">Locked</label>
+                      <input type="text" class="form-control" name="example-text-input"  required id="txt_locked" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                      <label class="form-label">Enabled</label>
+                      <input type="text" class="form-control" name="example-text-input"  required id="txt_enabled" disabled>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Appointment details modal window  -->
-    <div class="modal modal-blur fade" id="modal-appointment-details" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Student Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-
-          <div class="modal-body">
-            <div class="mb-3">
-              <label class="form-label" id="txt_uni_message" style="color:green"></label>
-            </div>
-
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">ID</label>
-                <input type="text" class="form-control" name="example-text-input" required id="txt_appt_id" disabled>
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label">Student Name</label>
-                <input type="text" class="form-control" name="example-text-input"  required id="txt_std_name" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">Rep Number</label>
-                <input type="text" class="form-control" name="example-text-input"  required id="txt_repname" disabled>
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label">Phone Number</label>
-                <input type="text" class="form-control" name="example-text-input"  required id="txt_phonenumber" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">Appointment Date</label>
-                <input type="text" class="form-control" name="example-text-input" id="txt_appt_date" disabled>
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label">Appointment Slot</label>
-                <input type="text" class="form-control" name="example-text-input" required id="txt_appt_slot" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">University Name</label>
-                <input type="text" class="form-control" name="example-text-input" id="txt_std_university" disabled>
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label">Location</label>
-                <input type="text" class="form-control" name="example-text-input" required id="txt_location" disabled>
-              </div>
-            </div>
-
-            <div class="col-lg-12">
-              <div>
-                <label class="form-label">Creation Date</label>
-                <input type="text" class="form-control" name="example-text-input" required id="txt_creation_date" disabled>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-              Cancel
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End of appointment details modal window-->
 
     <!-- Libs JS -->
     <script src="/libs/apexcharts/dist/apexcharts.min.js?1684106062" defer></script>
@@ -263,8 +201,8 @@
     <script>
 
         $(document).ready(function() {
-          $("#tbl_student").DataTable();
-          var testDataUrl = "/api/getAllAppointments"
+          //loadAppointmentsGraph();
+          var testDataUrl = "/api/profile"
           loadData();
           function loadData() {
             $.ajax({
@@ -286,56 +224,19 @@
           // populate the data table with JSON data
           function populateDataTable(data) {
             console.log(data);
-            console.log("populating student data table...");
-            $("#tbl_student").DataTable().clear();
-            var length = data.length;
-            for(var i = 0; i < length; i++) {
-              var appointment = data[i];
-              $('#tbl_student').dataTable().fnAddData([
-                appointment.id,
-                appointment.studentname,
-                appointment.repname,
-                appointment.universityname,
-                appointment.location,
-                appointment.appointmentdate,
-                appointment.appointmentslot,
-                appointment.createdatetime,
-                appointment.phonenumber,
-                '<button class="btn btn-primary" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
-              ]);
-            }
+            console.log("populating university data table...");
+            $('#txt_email').val(data.email);
+            $('#txt_mobile').val(data.mobile);
+            $('#txt_id').val(data.id);
+            $('#txt_created_date').val(data.createdAt);
+            $('#txt_updated_date').val(data.updatedAt);
+            $('#txt_locked').val(data.locked);
+            $('#txt_enabled').val(data.enabled);
+            $('#txt_username').val(data.username);
+            $('#txt_role').val(data.role);
           }
         });
 
-        // onclick view button in university details table...
-        $('#tbl_student').on('click','button',function(){
-          console.log("on click btn-tr-view-data...")
-          var $row = $(this).closest("tr");
-          console.log($row);
-          var $tds = $row.find("td");
-          console.log($tds);
-          var id = $tds[0].innerText;
-          var studentName = $tds[1].innerText;
-          var repName = $tds[2].innerText;
-          var universityName = $tds[3].innerText;
-          var location = $tds[4].innerText;
-          var apptDate = $tds[5].innerText;
-          var apptSlot = $tds[6].innerText;
-          var apptCreation = $tds[7].innerText;
-          var phoneNum = $tds[8].innerText;
-
-          $('#txt_appt_id').val(id);
-          $('#txt_std_name').val(studentName);
-          $('#txt_repname').val(repName);
-          $('#txt_appt_date').val(apptDate);
-          $('#txt_appt_slot').val(apptSlot);
-          $('#txt_creation_date').val(apptCreation);
-          $('#txt_location').val(location);
-          $('#txt_std_university').val(universityName);
-          $('#txt_phonenumber').val(phoneNum);
-          $('#modal-appointment-details').modal('show');
-        });
-        // End of View Details button...
     </script>
   </body>
 </html>

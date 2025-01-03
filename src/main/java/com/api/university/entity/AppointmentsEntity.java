@@ -37,4 +37,7 @@ public class AppointmentsEntity {
 
     @Column(name = "createdatetime")
     private Timestamp createdatetime;
+
+    @Column(name = "phonenumber")
+    private String phonenumber;
 }

@@ -31,7 +31,7 @@
          border-radius: 5px;
       }
       table#tbl_student > thead > tr > th {
-          background-color: #183d9d;
+          background-color: #206bc4;
           color: white;
           font-family: sans-serif;
           padding: 10px;
@@ -79,7 +79,7 @@
                 <span class="avatar avatar-sm" style="background-image: url('/img/profile.png')"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="/api/dashboardDetails" class="dropdown-item" id="profile_page"><span th:utext="${userId}"></a>
+                <a href="/api/profile" class="dropdown-item" id="profile_page"><span th:utext="${userId}"></a>
                 <a href="/api/profile" class="dropdown-item" id="profile_page">Profile</a>
                 <a href="/api/dashboardDetails" class="dropdown-item">Dashboard</a>
                 <div class="dropdown-divider"></div>
@@ -105,14 +105,14 @@
                 <li class="nav-item">
                   <a class="nav-link" href="./universityDetails" >
                     <span class="nav-link-title">
-                      University Details
+                      Universities
                     </span>
                   </a>
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="./studentDetails" >
                     <span class="nav-link-title">
-                      Student Details
+                      Students
                     </span>
                   </a>
                 </li>
@@ -162,6 +162,7 @@
                         <th>University Name</th>
                         <th>Location</th>
                         <th>Feedback</th>
+                        <th></th>
                       </tr>
                       </thead>
                     </table>
@@ -174,6 +175,69 @@
         </div>
       </div>
     </div>
+
+    <!-- Student details modal window  -->
+    <div class="modal modal-blur fade" id="modal-student-details" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Student Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label" id="txt_uni_message" style="color:green"></label>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">Student Name</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_std_name" disabled>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Phone Number</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_std_phonenum" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_std_email" disabled>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Student Location</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_std_location" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">University Name</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_std_university" disabled>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_location" disabled>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label class="form-label">Feedback</label>
+                <textarea class="form-control" rows="3" required="true" id="txt_std_feedback" disabled></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+              Cancel
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of student details modal window-->
+
     <!-- Libs JS -->
     <script src="/libs/apexcharts/dist/apexcharts.min.js?1684106062" defer></script>
     <script src="/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062" defer></script>
@@ -221,12 +285,38 @@
                 student.studentlocation,
                 student.universityname,
                 student.location,
-                student.feedback
+                student.feedback,
+                '<button class="btn btn-primary" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
               ]);
             }
           }
         });
 
+        // onclick view button in university details table...
+        $('#tbl_student').on('click','button',function(){
+          console.log("on click btn-tr-view-data...")
+          var $row = $(this).closest("tr");
+          console.log($row);
+          var $tds = $row.find("td");
+          console.log($tds);
+          var studentName = $tds[0].innerText;
+          var phoneNum = $tds[1].innerText;
+          var email = $tds[2].innerText;
+          var stdLocation = $tds[3].innerText;
+          var universityName = $tds[4].innerText;
+          var location = $tds[5].innerText;
+          var feedback = $tds[6].innerText;
+
+          $('#txt_std_name').val(studentName);
+          $('#txt_std_phonenum').val(phoneNum);
+          $('#txt_std_email').val(email);
+          $('#txt_std_location').val(stdLocation);
+          $('#txt_location').val(location);
+          $('#txt_std_university').val(universityName);
+          $('#txt_std_feedback').val(feedback);
+          $('#modal-student-details').modal('show');
+        });
+        // End of View Details button...
     </script>
   </body>
 </html>

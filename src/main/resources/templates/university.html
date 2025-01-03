@@ -33,7 +33,7 @@
          border-radius: 5px;
       }
       table#tbl_university > thead > tr > th {
-          background-color: #183d9d;
+          background-color: #206bc4;
           color: white;
           font-family: sans-serif;
           margin-top: 18px !important;
@@ -55,6 +55,9 @@
       }table#tbl_representative_details>thead>tr>th {
           background: #000000c9;
           color: white;
+      }
+      div#div_tbl_representative {
+          overflow: scroll;
       }
     </style>
   </head>
@@ -90,7 +93,7 @@
                 <span class="avatar avatar-sm" style="background-image: url('/img/profile.png')"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="/api/dashboardDetails" class="dropdown-item" id="profile_page"><span th:utext="${userId}"></a>
+                <a href="/api/profile" class="dropdown-item" id="profile_page"><span th:utext="${userId}"></a>
                 <a href="/api/profile" class="dropdown-item" id="profile_page">Profile</a>
                 <a href="/api/dashboardDetails" class="dropdown-item">Dashboard</a>
                 <div class="dropdown-divider"></div>
@@ -116,14 +119,14 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="./universityDetails" >
                     <span class="nav-link-title">
-                      University Details
+                      Universities
                     </span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="./studentDetails" >
                     <span class="nav-link-title">
-                      Student Details
+                      Students
                     </span>
                   </a>
                 </li>
@@ -157,14 +160,12 @@
                     <span class="glyphicon glyphicon-refresh"></span>
                   </a>
                   <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                     Add University
                   </a>
-                  <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-                  </a>
+<!--                  <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>-->
+<!--                  </a>-->
                 </div>
               </div>
             </div>
@@ -388,7 +389,7 @@
             </div><br>
             <!-- Representative details table-->
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12" id="div_tbl_representative">
                 <table id="tbl_representative" class="table table-striped" style="width:100%">
                   <thead>
                   <tr>
@@ -570,7 +571,7 @@
 <!--            </div>-->
             <!-- Representative details table-->
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12" id="div_tbl_representative">
                 <table id="tbl_representative_details" class="table table-striped" style="width:100%">
                   <thead>
                   <tr>
@@ -590,12 +591,13 @@
             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
               Cancel
             </a>
-            <button type="button" class="btn btn-primary" id="btn_uni_save">Save</button>
+<!--            <button type="button" class="btn btn-primary" id="btn_uni_save">Save</button>-->
           </div>
         </div>
       </div>
     </div>
     <!-- End of university details modal window-->
+
     <!-- Libs JS -->
     <script src="/libs/apexcharts/dist/apexcharts.min.js?1684106062" defer></script>
     <script src="/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062" defer></script>
@@ -744,7 +746,7 @@
             var repPsd = $('#txt_rep_psd').val();
             var repPhone = $('#txt_rep_phone').val();
             var repAvailability = $('#rep_availability').find(":selected").val();
-            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">Remove</button></div></td></tr>';
+            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">-</button></div></td></tr>';
             $('#tbl_representative').append(data_tr);
             $('#txt_rep_name').val('');
             $('#txt_rep_uname').val('');
