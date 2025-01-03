@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>Universities.</title>
     <!-- CSS files -->
     <link href="/css/tabler.min.css?1684106062" rel="stylesheet"/>
     <link href="/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
@@ -97,7 +97,7 @@
                 <a href="/api/profile" class="dropdown-item" id="profile_page">Profile</a>
                 <a href="/api/dashboardDetails" class="dropdown-item">Dashboard</a>
                 <div class="dropdown-divider"></div>
-                <a href="/api/login" class="dropdown-item">Logout</a>
+                <a th:href="@{/api/logout}" class="dropdown-item">Logout</a>
               </div>
             </div>
           </div>
