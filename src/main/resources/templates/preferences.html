@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Appointments.</title>
+    <title>Students.</title>
     <!-- CSS files -->
     <link href="/css/tabler.min.css?1684106062" rel="stylesheet"/>
     <link href="/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
     <script src="/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="/css/custom.css">
-
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -103,7 +102,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                   <a class="nav-link" href="./preferences" >
                     <span class="nav-link-title">
                       Preferences
@@ -124,7 +123,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="./appointmentDetails" >
                     <span class="nav-link-title">
                       Appointments
@@ -144,7 +143,7 @@
               <div class="col">
                 <!-- Page pre-title -->
                 <h2 class="page-title">
-                  Appointment Details
+                  Student Preferences
                 </h2>
               </div>
               <!-- Page title actions -->
@@ -160,18 +159,19 @@
 
                   <div class="table-responsive">
 
-                    <table id="tbl_student" class="table table-striped" style="width:100%">
+                    <table id="tbl_preferences" class="table table-striped" style="width:100%">
                       <thead>
                       <tr>
                         <th>ID</th>
                         <th>Student Name</th>
-                        <th>Rep Name</th>
-                        <th>University Name</th>
-                        <th>Location</th>
-                        <th>Appointment Date</th>
-                        <th>Appointment Slot</th>
-                        <th>Creation Date</th>
                         <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>Year Of Plan</th>
+                        <th>Course Type</th>
+                        <th>Creation Date</th>
+                        <th>Intake Type</th>
                         <th></th>
                       </tr>
                       </thead>
@@ -186,8 +186,8 @@
       </div>
     </div>
 
-    <!-- Appointment details modal window  -->
-    <div class="modal modal-blur fade" id="modal-appointment-details" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Student details modal window  -->
+    <div class="modal modal-blur fade" id="modal-preferences-details" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -202,49 +202,39 @@
 
             <div class="row">
               <div class="col-lg-6">
-                <label class="form-label">ID</label>
-                <input type="text" class="form-control" name="example-text-input" required id="txt_appt_id" disabled>
-              </div>
-              <div class="col-lg-6">
                 <label class="form-label">Student Name</label>
-                <input type="text" class="form-control" name="example-text-input"  required id="txt_std_name" disabled>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">Rep Number</label>
-                <input type="text" class="form-control" name="example-text-input"  required id="txt_repname" disabled>
+                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_std_name" disabled>
               </div>
               <div class="col-lg-6">
                 <label class="form-label">Phone Number</label>
-                <input type="text" class="form-control" name="example-text-input"  required id="txt_phonenumber" disabled>
+                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_std_phonenum" disabled>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6">
-                <label class="form-label">Appointment Date</label>
-                <input type="text" class="form-control" name="example-text-input" id="txt_appt_date" disabled>
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_std_email" disabled>
               </div>
               <div class="col-lg-6">
-                <label class="form-label">Appointment Slot</label>
-                <input type="text" class="form-control" name="example-text-input" required id="txt_appt_slot" disabled>
+                <label class="form-label">Student Location</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_std_location" disabled>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6">
                 <label class="form-label">University Name</label>
-                <input type="text" class="form-control" name="example-text-input" id="txt_std_university" disabled>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_std_university" disabled>
               </div>
               <div class="col-lg-6">
                 <label class="form-label">Location</label>
-                <input type="text" class="form-control" name="example-text-input" required id="txt_location" disabled>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_location" disabled>
               </div>
             </div>
 
             <div class="col-lg-12">
               <div>
-                <label class="form-label">Creation Date</label>
-                <input type="text" class="form-control" name="example-text-input" required id="txt_creation_date" disabled>
+                <label class="form-label">Feedback</label>
+                <textarea class="form-control" rows="3" required="true" id="txt_std_feedback" disabled></textarea>
               </div>
             </div>
           </div>
@@ -256,7 +246,7 @@
         </div>
       </div>
     </div>
-    <!-- End of appointment details modal window-->
+    <!-- End of student details modal window-->
 
     <!-- Libs JS -->
     <script src="/libs/apexcharts/dist/apexcharts.min.js?1684106062" defer></script>
@@ -271,7 +261,7 @@
 
         $(document).ready(function() {
           $("#tbl_student").DataTable();
-          var testDataUrl = "/api/getAllAppointments"
+          var testDataUrl = "/api/getAllPreferences"
           loadData();
           function loadData() {
             $.ajax({
@@ -297,17 +287,18 @@
             $("#tbl_student").DataTable().clear();
             var length = data.length;
             for(var i = 0; i < length; i++) {
-              var appointment = data[i];
-              $('#tbl_student').dataTable().fnAddData([
-                appointment.id,
-                appointment.studentname,
-                appointment.repname,
-                appointment.universityname,
-                appointment.location,
-                appointment.appointmentdate,
-                appointment.appointmentslot,
-                appointment.createdatetime,
-                appointment.phonenumber,
+              var preferences = data[i];
+              $('#tbl_preferences').dataTable().fnAddData([
+                preferences.id,
+                preferences.studentname,
+                preferences.phonenumber,
+                preferences.email,
+                preferences.country,
+                preferences.state,
+                preferences.yearofplan,
+                preferences.coursetype,
+                preferences.createdatetime,
+                preferences.intaketype,
                 '<button class="btn btn-primary" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
               ]);
             }
@@ -315,7 +306,7 @@
         });
 
         // onclick view button in university details table...
-        $('#tbl_student').on('click','button',function(){
+        $('#tbl_preferences').on('click','button',function(){
           console.log("on click btn-tr-view-data...")
           var $row = $(this).closest("tr");
           console.log($row);
@@ -323,24 +314,22 @@
           console.log($tds);
           var id = $tds[0].innerText;
           var studentName = $tds[1].innerText;
-          var repName = $tds[2].innerText;
-          var universityName = $tds[3].innerText;
-          var location = $tds[4].innerText;
-          var apptDate = $tds[5].innerText;
-          var apptSlot = $tds[6].innerText;
-          var apptCreation = $tds[7].innerText;
-          var phoneNum = $tds[8].innerText;
+          var phoneNum = $tds[2].innerText;
+          var email = $tds[3].innerText;
+          var country = $tds[4].innerText;
+          var state = $tds[5].innerText;
+          var courseType = $tds[6].innerText;
+          var creationDate = $tds[7].innerText;
+          var intakeType = $tds[8].innerText;
 
-          $('#txt_appt_id').val(id);
           $('#txt_std_name').val(studentName);
-          $('#txt_repname').val(repName);
-          $('#txt_appt_date').val(apptDate);
-          $('#txt_appt_slot').val(apptSlot);
-          $('#txt_creation_date').val(apptCreation);
-          $('#txt_location').val(location);
-          $('#txt_std_university').val(universityName);
-          $('#txt_phonenumber').val(phoneNum);
-          $('#modal-appointment-details').modal('show');
+          $('#txt_std_phonenum').val(phoneNum);
+          $('#txt_std_email').val(email);
+          $('#txt_std_location').val(country);
+          $('#txt_location').val(state);
+          $('#txt_std_university').val(courseType);
+          $('#txt_std_feedback').val(creationDate);
+          $('#modal-preferences-details').modal('show');
         });
         // End of View Details button...
     </script>
