@@ -38,4 +38,7 @@ public class StudentPreferencesEntity {
 
     @Column(name = "coursetype")
     private String coursetype;
+
+    @Column(name = "intaketype")
+    private String intaketype;
 }
