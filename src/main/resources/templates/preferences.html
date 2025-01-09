@@ -202,39 +202,53 @@
 
             <div class="row">
               <div class="col-lg-6">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_std_id" disabled>
+              </div>
+              <div class="col-lg-6">
                 <label class="form-label">Student Name</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_std_name" disabled>
               </div>
+            </div>
+            <div class="row">
               <div class="col-lg-6">
                 <label class="form-label">Phone Number</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_std_phonenum" disabled>
               </div>
-            </div>
-            <div class="row">
               <div class="col-lg-6">
                 <label class="form-label">Email</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_std_email" disabled>
               </div>
+
+            </div>
+            <div class="row">
               <div class="col-lg-6">
-                <label class="form-label">Student Location</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_std_location" disabled>
+                <label class="form-label">Country</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_std_country" disabled>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">State</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_std_state" disabled>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6">
-                <label class="form-label">University Name</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_std_university" disabled>
+                <label class="form-label">Course Type</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_course" disabled>
               </div>
               <div class="col-lg-6">
-                <label class="form-label">Location</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_location" disabled>
+                <label class="form-label">Intake Type</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_intake" disabled>
               </div>
             </div>
-
-            <div class="col-lg-12">
-              <div>
-                <label class="form-label">Feedback</label>
-                <textarea class="form-control" rows="3" required="true" id="txt_std_feedback" disabled></textarea>
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label">Year of Plan</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_year_of_plan" disabled>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Creation Date</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_creation_date" disabled>
               </div>
             </div>
           </div>
@@ -318,17 +332,20 @@
           var email = $tds[3].innerText;
           var country = $tds[4].innerText;
           var state = $tds[5].innerText;
-          var courseType = $tds[6].innerText;
-          var creationDate = $tds[7].innerText;
-          var intakeType = $tds[8].innerText;
+          var yearofplan = $tds[6].innerText;
+          var courseType = $tds[7].innerText;
+          var creationDate = $tds[8].innerText;
+          var intakeType = $tds[9].innerText;
 
           $('#txt_std_name').val(studentName);
           $('#txt_std_phonenum').val(phoneNum);
           $('#txt_std_email').val(email);
-          $('#txt_std_location').val(country);
-          $('#txt_location').val(state);
-          $('#txt_std_university').val(courseType);
-          $('#txt_std_feedback').val(creationDate);
+          $('#txt_std_country').val(country);
+          $('#txt_std_state').val(state);
+          $('#txt_course').val(courseType);
+          $('#txt_intake').val(intakeType);
+          $('#txt_creation_date').val(creationDate);
+          $('#txt_year_of_plan').val(yearofplan);
           $('#modal-preferences-details').modal('show');
         });
         // End of View Details button...
