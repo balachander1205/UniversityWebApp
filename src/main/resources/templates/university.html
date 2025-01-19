@@ -58,10 +58,11 @@
       }
       div#div_tbl_representative {
           overflow: scroll;
+          height: 200px;
       }
       #img_profile_pic, #avatar {
-          height: 50px;
-          width: 50px;
+          height: 80px;
+          width: 80px;
       }
     </style>
   </head>
@@ -398,11 +399,11 @@
 <!--              </div>-->
               <div class="col-lg-4">
                 <label class="form-label"></label>
+                <img class="img" id="avatar" />
                 <button class="btn btn-primary" id="btn_add_rep">Add</button>
               </div>
               <div class="col-lg-4">
                 <label class="form-label"></label>
-                <img class="img" id="avatar" />
               </div>
               <div class="col-lg-6">
                 <label class="form-label"></label>
@@ -604,6 +605,7 @@
 <!--                    <th>password</th>-->
                     <th>phonenumber</th>
                     <th>availability</th>
+                    <th>Image</th>
                   </tr>
                   </thead>
                 </table>
@@ -750,7 +752,7 @@
               dataType: 'json',
               success: function (data) {
                 $(data).each(function(i, item){
-                    var data_tr = '<tr><td>'+item.repname+'</td><td>'+item.username+'</td><td>'+item.phonenumber+'</td><td>'+item.availability+'</td></tr>';
+                    var data_tr = '<tr><td>'+item.repname+'</td><td>'+item.username+'</td><td>'+item.phonenumber+'</td><td>'+item.availability+'</td><td><img id="img_profile_pic" src="'+item.profilepic+'"></td></tr>';
                     $('#tbl_representative_details').append(data_tr);
 
                 });
@@ -777,6 +779,7 @@
             $('#txt_rep_name').val('');
             $('#txt_rep_uname').val('');
             $('#txt_rep_psd').val('');
+            $('#avatar').attr('src', '');
           });
 
           // btn_remove_rep onclick remove representative from table row.
