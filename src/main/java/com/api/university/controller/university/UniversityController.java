@@ -8,6 +8,8 @@ import com.api.university.repository.UniversityRepository;
 import com.api.university.service.RepresentativeService;
 import com.api.university.utils.CommonUtils;
 import com.api.university.utils.Constants;
+import com.api.university.utils.HtmlParserUtil;
+import com.api.university.utils.ImageUploadUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -52,6 +54,12 @@ public class UniversityController {
 
     @Autowired
     CommonUtils commonUtils;
+
+    @Autowired
+    HtmlParserUtil htmlParserUtil;
+
+    @Autowired
+    ImageUploadUtils imageUploadUtils;
 
     @PostMapping("/getAllUniversities")
     public ResponseEntity getAllUniversities() {
@@ -102,8 +110,11 @@ public class UniversityController {
                 JSONObject jsonObject = reps.getJSONObject(i);
                 System.out.println("Rep="+jsonObject);
                 System.out.println("Availability="+jsonObject.getString("availability"));
+                String image = jsonObject.getString("image");
+                String src = htmlParserUtil.getImageSrc(image).split("base64,")[1];
+                String imgUrl = imageUploadUtils.uploadImageToImgBB(src);
                 representativeService.createRepresentative(jsonObject.getString("repName"), jsonObject.getString("username"),
-                        jsonObject.getString("phonenumber"), "https://cdn-icons-png.flaticon.com/512/4042/4042171.png", jsonObject.getString("username"), jsonObject.getString("password"), universityID , jsonObject.getString("availability"));
+                        jsonObject.getString("phonenumber"), (imgUrl!=null?imgUrl:"https://cdn-icons-png.flaticon.com/512/4042/4042171.png"), jsonObject.getString("username"), jsonObject.getString("password"), universityID , jsonObject.getString("availability"));
             }
         }
         List<UniversityEntity> allUniversities = universityService.getAllUniversities();

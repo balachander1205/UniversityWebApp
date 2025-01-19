@@ -59,6 +59,10 @@
       div#div_tbl_representative {
           overflow: scroll;
       }
+      #img_profile_pic, #avatar {
+          height: 50px;
+          width: 50px;
+      }
     </style>
   </head>
   <body>
@@ -357,13 +361,21 @@
 <!--            </div>-->
             <!-- Add Representative form -->
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <label class="form-label">Representative Name</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="Representative Name" id="txt_rep_name">
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <label class="form-label">Phone Number</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="Phone Number" id="txt_rep_phone">
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_uname">
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_psd">
               </div>
               <div class="col-lg-4">
                 <label class="form-label">Availability</label>
@@ -375,24 +387,28 @@
                   <option value="10:00-7:00" selected>10:00-7:00</option>
                 </select>
               </div>
-              <div class="col-lg-4">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_uname">
-              </div>
-              <div class="col-lg-4">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_psd">
-              </div>
 
+              <div class="col-lg-4">
+                <label class="form-label">Profile Picture</label>
+                <input class="form-control" id="selectAvatar" type="file"/>
+              </div>
 <!--              <div class="col-lg-3">-->
 <!--                <label class="form-label">Phone Number</label>-->
 <!--                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_availability">-->
 <!--              </div>-->
-
               <div class="col-lg-4">
                 <label class="form-label"></label>
                 <button class="btn btn-primary" id="btn_add_rep">Add</button>
               </div>
+              <div class="col-lg-4">
+                <label class="form-label"></label>
+                <img class="img" id="avatar" />
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label"></label>
+                <textarea id="textArea" rows="30" cols="50" style="display:none;"></textarea>
+              </div>
+
             </div><br>
             <!-- Representative details table-->
             <div class="row">
@@ -405,6 +421,7 @@
                     <th>password</th>
                     <th>phonenumber</th>
                     <th>availability</th>
+                    <th>image</th>
                     <th>Info</th>
                   </tr>
                   </thead>
@@ -753,7 +770,9 @@
             var repPsd = $('#txt_rep_psd').val();
             var repPhone = $('#txt_rep_phone').val();
             var repAvailability = $('#rep_availability').find(":selected").val();
-            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">-</button></div></td></tr>';
+            var imageSrc = $('#textArea').val();
+            console.log(imageSrc);
+            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><img id="img_profile_pic" src="'+imageSrc+'"></td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">-</button></div></td></tr>';
             $('#tbl_representative').append(data_tr);
             $('#txt_rep_name').val('');
             $('#txt_rep_uname').val('');
@@ -841,6 +860,36 @@
           });
         });
 
+        // Image upload function.
+        const input = document.getElementById("selectAvatar");
+        const avatar = document.getElementById("avatar");
+        const textArea = document.getElementById("textArea");
+
+        const convertBase64 = (file) => {
+          return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+              resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+              reject(error);
+            };
+          });
+        };
+
+        const uploadImage = async (event) => {
+          const file = event.target.files[0];
+          const base64 = await convertBase64(file);
+          avatar.src = base64;
+          textArea.innerText = base64;
+        };
+
+        input.addEventListener("change", (e) => {
+          uploadImage(e);
+        });
     </script>
   </body>
 </html>
