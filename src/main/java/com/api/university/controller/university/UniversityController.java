@@ -101,7 +101,7 @@ public class UniversityController {
         universityService.insertUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
                 universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
                 universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), "",
-                universityModel.getCourse(), universityModel.getIsRecommended(), universityID);
+                universityModel.getCourse(), universityModel.getIsRecommended(), universityID, universityModel.getCountry());
         if (universityModel.getRepresentatives() != null && universityModel.getRepresentatives().length() > 0) {
             JSONArray reps = new JSONArray(universityModel.getRepresentatives());
             System.out.println("Reps="+reps);
@@ -117,6 +117,39 @@ public class UniversityController {
                         jsonObject.getString("phonenumber"), (imgUrl!=null?imgUrl:"https://cdn-icons-png.flaticon.com/512/4042/4042171.png"), jsonObject.getString("username"), jsonObject.getString("password"), universityID , jsonObject.getString("availability"));
             }
         }
+        List<UniversityEntity> allUniversities = universityService.getAllUniversities();
+        UniversityResponseModel universityResponseModel = new UniversityResponseModel();
+        universityResponseModel.setUniversities(allUniversities);
+        Map arrayList = new HashMap();
+        allUniversities.forEach((entity)->{
+            arrayList.put(entity.getRepname(), entity.getRepname());
+        });
+        universityResponseModel.setStatus(HttpStatus.ACCEPTED.toString());
+        universityResponseModel.setMessage(Constants.MSG_NEW_UNIVERSITY_SUCCESS.replace("%s", universityModel.getUniversityname()));
+        return ResponseEntity.ok(universityResponseModel);
+    }
+
+    @PostMapping("/updateUniversity")
+    public ResponseEntity updateUniversity(@RequestBody UniversityModel universityModel){
+        universityService.updateUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
+                universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
+                universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), "",
+                universityModel.getCourse(), universityModel.getIsRecommended(), universityModel.getUniversityID());
+        /*if (universityModel.getRepresentatives() != null && universityModel.getRepresentatives().length() > 0) {
+            JSONArray reps = new JSONArray(universityModel.getRepresentatives());
+            System.out.println("Reps="+reps);
+            for (int i = 0; i < reps.length(); i++)
+            {
+                JSONObject jsonObject = reps.getJSONObject(i);
+                System.out.println("Rep="+jsonObject);
+                System.out.println("Availability="+jsonObject.getString("availability"));
+                String image = jsonObject.getString("image");
+                String src = htmlParserUtil.getImageSrc(image).split("base64,")[1];
+                String imgUrl = imageUploadUtils.uploadImageToImgBB(src);
+                representativeService.createRepresentative(jsonObject.getString("repName"), jsonObject.getString("username"),
+                        jsonObject.getString("phonenumber"), (imgUrl!=null?imgUrl:"https://cdn-icons-png.flaticon.com/512/4042/4042171.png"), jsonObject.getString("username"), jsonObject.getString("password"), universityID , jsonObject.getString("availability"));
+            }
+        }*/
         List<UniversityEntity> allUniversities = universityService.getAllUniversities();
         UniversityResponseModel universityResponseModel = new UniversityResponseModel();
         universityResponseModel.setUniversities(allUniversities);
@@ -206,7 +239,7 @@ public class UniversityController {
             universityService.insertUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
                     universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
                     universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), allImages,
-                    universityModel.getCourse(), universityModel.getIsRecommended(), universityID);
+                    universityModel.getCourse(), universityModel.getIsRecommended(), universityID, universityModel.getCountry());
 
             List<UniversityEntity> allUniversities = universityService.getAllUniversities();
             String homeURL = ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();

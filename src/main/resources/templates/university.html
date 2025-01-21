@@ -239,12 +239,18 @@
             </div>
             <div class="row">
               <div class="col-lg-6">
-                <label class="form-label">Location</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_location">
+                <label class="form-label">Country</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Country" id="txt_country">
               </div>
               <div class="col-lg-6">
                 <label class="form-label">State</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_state">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_location">
               </div>
             </div>
 
@@ -461,9 +467,13 @@
             </div>
 
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-6">
                 <label class="form-label">University ID</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university_id" disabled>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Recommended</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university_rec" disabled>
               </div>
             </div>
             <div class="row">
@@ -474,12 +484,18 @@
             </div>
             <div class="row">
               <div class="col-lg-6">
-                <label class="form-label">Location</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_uni_location">
+                <label class="form-label">Country</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Country" id="txt_uni_country">
               </div>
               <div class="col-lg-6">
                 <label class="form-label">State</label>
                 <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_uni_state">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_uni_location">
               </div>
             </div>
 
@@ -614,6 +630,7 @@
             <!-- End of Add Representative form -->
           </div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-success" id="btn_update">Update</button>
             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
               Cancel
             </a>
@@ -704,6 +721,8 @@
             $('#txt_uni_location').val($tds[3].innerText);
             $('#txt_uni_state').val($tds[4].innerText);
             $('#txt_uni_description').val($tds[2].innerText);
+            $('#txt_university_rec').val($tds[6].innerText);
+            $('#txt_uni_country').val($tds[5].innerText);
             $('#modal-report-university').modal('show');
 
             // Clear all check boxes
@@ -797,6 +816,7 @@
             var username = $('#txt_username').val();
             var password = $('#txt_username').val();
             var state = $('#txt_state').val();
+            var country = $('#txt_country').val();
             var repname = $('#rep_names :selected').text();
             var checkboxValues = [];
             $('input[name="report-type"]:checked').map(function() {
@@ -833,6 +853,7 @@
                           "universityname": university,
                           "username": username,
                           "state":state,
+                          "country":country,
                           "course":courseTypeValues.toString(),
                           "isRecommended": isRecommended.toString(),
                           "representatives":JSON.stringify(rows)
@@ -843,6 +864,84 @@
               $.ajax({
                 type: 'POST',
                 url: '/api/addUniversity',
+                contentType: "application/json",
+                dataType: 'json',
+                data: JSON.stringify(payload),
+                success: function (data) {
+                  myJsonData = data;
+                  console.log(data);
+                  $('#txt_message').html(data.message);
+                  alert(data.message);
+                  $('#modal-report').modal('hide');
+                },
+                error: function (e) {
+                  console.log("There was an error inside saveUniversity...");
+                  console.log("error: " + JSON.stringify(e));
+                }
+              });
+            }
+            console.log(payload);
+          });
+
+
+          // onclick for update button in add university
+          $('#btn_update').click(function(){
+            console.log("On click save university...");
+            var universityID = $('#txt_university_id').val();
+            var university = $('#txt_university_name').val();
+            var description = $('#txt_uni_description').val();
+            var location = $('#txt_uni_location').val();
+            var username = $('#txt_username').val();
+            var password = $('#txt_username').val();
+            var state = $('#txt_uni_state').val();
+            var repname = $('#rep_names :selected').text();
+            var country = $('#txt_uni_country').val();
+            var checkboxValues = [];
+            $('input[name="report-type"]:checked').map(function() {
+                checkboxValues.push($(this).val());
+            });
+            var courseTypeValues = [];
+            $('input[name="uni-report-type"]:checked').map(function() {
+                courseTypeValues.push($(this).val());
+            });
+            var isRecommended = $('#uni_recommend').find(":selected").val();
+            // convert representative table into json
+            var header = [];
+            var rows = [];
+            $("#tbl_representative thead tr th").each(function (i, th) {
+                header.push($(th).html());
+            });
+            $("#tbl_representative tr:has(td)").each(function (i, tr) {
+                var row = {};
+                $(tr).find('td').each(function (j, td) {
+                    row[header[j]] = $(td).html();
+                });
+                rows.push(row);
+            });
+            console.log('Table Rows:', rows);
+            console.log(JSON.stringify(rows));
+            console.log(university, description, location, username, password, checkboxValues, courseTypeValues);
+
+            var payload = {
+                          "admissionintake": checkboxValues.toString(),
+                          "description": description,
+                          "location": location,
+                          "password": password,
+                          "repname": "",
+                          "universityname": university,
+                          "username": username,
+                          "state":state,
+                          "country":country,
+                          "course":courseTypeValues.toString(),
+                          "isRecommended": isRecommended.toString(),
+                          "representatives":JSON.stringify(rows)
+                        }
+            saveUniversity();
+            function updateUniversity() {
+              console.log("Inside saveUniversity...")
+              $.ajax({
+                type: 'POST',
+                url: '/api/updateUniversity',
                 contentType: "application/json",
                 dataType: 'json',
                 data: JSON.stringify(payload),

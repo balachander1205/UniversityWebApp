@@ -16,7 +16,9 @@ public class UniversityModel {
     private String username;
     private String password;
     private String state;
+    private String country;
     private String course;
     private String isRecommended;
     private String representatives;
+    private String universityID;
 }
