@@ -13,6 +13,7 @@ import com.api.university.utils.ImageUploadUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +35,8 @@ import org.thymeleaf.util.StringUtils;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -288,8 +291,10 @@ public class UniversityController {
     @PostMapping(value = "/countries", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getCountries() throws IOException {
-        File file = FileUtils.getFile("./src/main/resources/countries_states.json");
-        String content = new String(Files.readAllBytes(file.toPath()));
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("countries_states.json");
+//        File file = FileUtils.getFile("./src/main/resources/countries_states.json");
+        String content = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+                //new String(Files.readAllBytes(file.toPath()));
         return content;
     }
 }
