@@ -12,6 +12,7 @@ import com.api.university.utils.HtmlParserUtil;
 import com.api.university.utils.ImageUploadUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,10 +132,11 @@ public class UniversityController {
 
     @PostMapping("/updateUniversity")
     public ResponseEntity updateUniversity(@RequestBody UniversityModel universityModel){
+        log.info("university ID={}",universityModel.getUniversityID());
         universityService.updateUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
                 universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
                 universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), "",
-                universityModel.getCourse(), universityModel.getIsRecommended(), universityModel.getUniversityID());
+                universityModel.getCourse(), universityModel.getIsRecommended(), universityModel.getUniversityID(), universityModel.getCountry());
         /*if (universityModel.getRepresentatives() != null && universityModel.getRepresentatives().length() > 0) {
             JSONArray reps = new JSONArray(universityModel.getRepresentatives());
             System.out.println("Reps="+reps);
@@ -158,7 +160,7 @@ public class UniversityController {
             arrayList.put(entity.getRepname(), entity.getRepname());
         });
         universityResponseModel.setStatus(HttpStatus.ACCEPTED.toString());
-        universityResponseModel.setMessage(Constants.MSG_NEW_UNIVERSITY_SUCCESS.replace("%s", universityModel.getUniversityname()));
+        universityResponseModel.setMessage(Constants.MSG_UPDATE_UNIVERSITY_SUCCESS.replace("%s", universityModel.getUniversityname()));
         return ResponseEntity.ok(universityResponseModel);
     }
 
@@ -281,5 +283,13 @@ public class UniversityController {
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(resource);
+    }
+
+    @PostMapping(value = "/countries", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getCountries() throws IOException {
+        File file = FileUtils.getFile("./src/main/resources/countries_states.json");
+        String content = new String(Files.readAllBytes(file.toPath()));
+        return content;
     }
 }

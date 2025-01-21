@@ -27,4 +27,12 @@ public class UniversityServiceImpl implements UniversityService {
                 repname, position, admissionintake, username, password, state, images,
                 coursetype, isrecommended, universityid, country);
     }
+
+    @Override
+    public void updateUniversity(String universityname, String description, String location, String repname, String position, String admissionintake, String username, String password, String state, String images, String coursetype, String isrecommended, String universityid, String country) {
+        universityRepository.updateUniversity(universityname, description, location,
+                repname, position, admissionintake, username, password, state, images,
+                coursetype, isrecommended, universityid, country);
+
+    }
 }

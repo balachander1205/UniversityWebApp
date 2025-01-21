@@ -27,11 +27,12 @@ public interface UniversityRepository extends CrudRepository<UniversityEntity, L
 
     @Transactional
     @Modifying
-    @Query(value = "update university set universityname=:universityname, description=:description, location=:location, repname=:repname, position=:position, " +
+    @Query(value = "update university set universityname=:universityname, description=:description, location=:location, repname=:repname, position=:position, countrycode=:countrycode, " +
             "admissionintake=:admissionintake, username=:username, password=:password, state=:state, images=:images, coursetype=:coursetype, isrecommended=:isrecommended " +
             "where universityid=:universityid" , nativeQuery = true)
     public void updateUniversity(@Param("universityname") String universityname, @Param("description") String description, @Param("location") String location,
                                  @Param("repname") String repname, @Param("position") String position, @Param("admissionintake") String admissionintake,
                                  @Param("username") String username, @Param("password") String password, @Param("state") String state, @Param("images") String images,
-                                 @Param("coursetype") String coursetype, @Param("isrecommended") String isrecommended, @Param("universityid") String universityid);
+                                 @Param("coursetype") String coursetype, @Param("isrecommended") String isrecommended, @Param("universityid") String universityid,
+                                 @Param("countrycode") String countrycode);
 }

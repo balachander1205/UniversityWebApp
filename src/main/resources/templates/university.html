@@ -240,11 +240,17 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="form-label">Country</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Country" id="txt_country">
+<!--                <input type="text" class="form-control" name="example-text-input" placeholder="Country" id="txt_country">-->
+                <select id="txt_country" class="form-control" name="example-text-input">
+                  <option value="">Select Country</option>
+                </select>
               </div>
               <div class="col-lg-6">
                 <label class="form-label">State</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_state">
+<!--                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_state">-->
+                <select id="txt_state" class="form-control" name="example-text-input">
+                  <option value="">Select State</option>
+                </select>
               </div>
             </div>
             <div class="row">
@@ -630,7 +636,7 @@
             <!-- End of Add Representative form -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" id="btn_update">Update</button>
+            <button class="btn btn-success" id="btn_update" type="button">Update</button>
             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
               Cancel
             </a>
@@ -657,6 +663,7 @@
           $("#tbl_university").DataTable();
           var testDataUrl = "/api/getAllUniversities"
           loadData();
+          getAllCountries();
           function loadData() {
             $.ajax({
               type: 'POST',
@@ -693,8 +700,6 @@
                 university.position,
                 university.admissionintake,
                 university.coursetype,
-<!--                university.username,-->
-<!--                university.password,-->
                 '<button class="btn btn-primary" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
               ]);
             }
@@ -815,8 +820,8 @@
             var location = $('#txt_location').val();
             var username = $('#txt_username').val();
             var password = $('#txt_username').val();
-            var state = $('#txt_state').val();
-            var country = $('#txt_country').val();
+            var state = $('#txt_state :selected').text();
+            var country = $('#txt_country :selected').text();
             var repname = $('#rep_names :selected').text();
             var checkboxValues = [];
             $('input[name="report-type"]:checked').map(function() {
@@ -886,7 +891,7 @@
 
           // onclick for update button in add university
           $('#btn_update').click(function(){
-            console.log("On click save university...");
+            console.log("On click update university...");
             var universityID = $('#txt_university_id').val();
             var university = $('#txt_university_name').val();
             var description = $('#txt_uni_description').val();
@@ -934,11 +939,12 @@
                           "country":country,
                           "course":courseTypeValues.toString(),
                           "isRecommended": isRecommended.toString(),
-                          "representatives":JSON.stringify(rows)
+                          "representatives":JSON.stringify(rows),
+                          "universityID":universityID
                         }
-            saveUniversity();
+            updateUniversity();
             function updateUniversity() {
-              console.log("Inside saveUniversity...")
+              console.log("Inside updateUniversity...")
               $.ajax({
                 type: 'POST',
                 url: '/api/updateUniversity',
@@ -961,6 +967,40 @@
             console.log(payload);
           });
         });
+
+        // Get all countries as json..
+        function getAllCountries() {
+          console.log("Inside saveUniversity...")
+          $.ajax({
+            type: 'POST',
+            url: '/api/countries',
+            contentType: "application/json",
+            dataType: 'json',
+            success: function (data) {
+              $.each(data, function(index, country) {
+                  $('#txt_country').append('<option value="' + country.name + '">' + country.name + '</option>');
+              });
+
+              // When country is selected, populate the states dropdown.
+              $('#txt_country').change(function() {
+                  var selectedCountry = $(this).val();
+                  var selectedCountryData = data.find(function(country) {
+                      return country.name === selectedCountry;
+                  });
+                  $('#txt_state').empty().append('<option value="">Select State</option>');
+                  if (selectedCountryData) {
+                      $.each(selectedCountryData.states, function(index, state) {
+                          $('#txt_state').append('<option value="' + state.id + '">' + state.name + '</option>');
+                      });
+                  }
+              });
+            },
+            error: function (e) {
+              console.log("There was an error inside saveUniversity...");
+              console.log("error: " + JSON.stringify(e));
+            }
+          });
+        }
 
         // Image upload function.
         const input = document.getElementById("selectAvatar");
