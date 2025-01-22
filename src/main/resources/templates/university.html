@@ -64,6 +64,10 @@
           height: 80px;
           width: 80px;
       }
+      #uniAvatar1, #uniAvatar2, #uniAvatar3 {
+          width: 200px;
+          height: 100px;
+      }
     </style>
   </head>
   <body>
@@ -253,10 +257,38 @@
                 </select>
               </div>
             </div>
+<!--            <div class="row">-->
+<!--              <div class="col-lg-12">-->
+<!--                <label class="form-label">Location</label>-->
+<!--                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_location">-->
+<!--              </div>-->
+<!--            </div>-->
             <div class="row">
-              <div class="col-lg-12">
-                <label class="form-label">Location</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_location">
+              <div class="col-lg-4">
+                <label class="form-label">Image1</label>
+                <input class="form-control" id="uniImage1" type="file"/>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Image2</label>
+                <input class="form-control" id="uniImage2" type="file"/>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Image3</label>
+                <input class="form-control" id="uniImage3" type="file"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="form-label"></label>
+                <img class="img" id="uniAvatar1" />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label"></label>
+                <img class="img" id="uniAvatar2" />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label"></label>
+                <img class="img" id="uniAvatar3" />
               </div>
             </div>
 
@@ -1007,6 +1039,10 @@
         const avatar = document.getElementById("avatar");
         const textArea = document.getElementById("textArea");
 
+        const uniImage1 = document.getElementById("uniImage1");
+        const uniImage2 = document.getElementById("uniImage2");
+        const uniImage3 = document.getElementById("uniImage3");
+
         const convertBase64 = (file) => {
           return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
@@ -1031,6 +1067,24 @@
 
         input.addEventListener("change", (e) => {
           uploadImage(e);
+        });
+
+        // Uploading university images
+        const uploadUniImage = async (event, id) => {
+          const file = event.target.files[0];
+          const base64 = await convertBase64(file);
+          $('#'+id).attr('src', base64);
+          //avatar.src = base64;
+          //textArea.innerText = base64;
+        };
+        uniImage1.addEventListener("change", (e) => {
+          uploadUniImage(e, "uniAvatar1");
+        });
+        uniImage2.addEventListener("change", (e) => {
+          uploadUniImage(e, "uniAvatar2");
+        });
+        uniImage3.addEventListener("change", (e) => {
+          uploadUniImage(e, "uniAvatar3");
         });
     </script>
   </body>
