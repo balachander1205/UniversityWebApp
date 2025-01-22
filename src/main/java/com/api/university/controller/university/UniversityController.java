@@ -102,9 +102,16 @@ public class UniversityController {
     public ResponseEntity addUniversity(@RequestBody UniversityModel universityModel){
         long currentTS = System.currentTimeMillis();
         String universityID = String.valueOf(currentTS);
+        List<String> images = new ArrayList<>();
+        if(universityModel.getImages().size()>0){
+            universityModel.getImages().forEach(image->{
+                String imgUrl = imageUploadUtils.uploadImageToImgBB(image.split("base64,")[1]);
+                images.add(imgUrl);
+            });
+        }
         universityService.insertUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
                 universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
-                universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), "",
+                universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), Arrays.toString(images.toArray()).replaceAll("\\[|\\]",""),
                 universityModel.getCourse(), universityModel.getIsRecommended(), universityID, universityModel.getCountry());
         if (universityModel.getRepresentatives() != null && universityModel.getRepresentatives().length() > 0) {
             JSONArray reps = new JSONArray(universityModel.getRepresentatives());

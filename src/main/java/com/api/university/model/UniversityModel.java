@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.json.JSONArray;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class UniversityModel {
@@ -21,4 +23,5 @@ public class UniversityModel {
     private String isRecommended;
     private String representatives;
     private String universityID;
+    private List<String> images;
 }

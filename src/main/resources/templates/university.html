@@ -15,6 +15,7 @@
     <script type="text/javascript" src="/js/jquery-3.7.1.js"></script>
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
     <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
 <!--    <script src="/js/jquery.tabletojson.min.js"></script>-->
     <link rel="stylesheet" href="/css/custom.css">
 
@@ -67,6 +68,9 @@
       #uniAvatar1, #uniAvatar2, #uniAvatar3 {
           width: 200px;
           height: 100px;
+      }label.error {
+          color: red;
+          font-size: 12px;
       }
     </style>
   </head>
@@ -231,250 +235,253 @@
           </div>
 
           <div class="modal-body">
-            <div class="mb-3">
-              <label class="form-label" id="txt_message" style="color:green"></label>
-            </div>
+            <form id="frm_new_university">
+              <div class="mb-3">
+                <label class="form-label" id="txt_message" style="color:green"></label>
+              </div>
 
-            <div class="row">
-              <div class="col-lg-12">
-                <label class="form-label">University Name</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university">
+              <div class="row">
+                <div class="col-lg-12">
+                  <label class="form-label">University Name</label>
+                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_university" name="txt_university">
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">Country</label>
-<!--                <input type="text" class="form-control" name="example-text-input" placeholder="Country" id="txt_country">-->
-                <select id="txt_country" class="form-control" name="example-text-input">
-                  <option value="">Select Country</option>
-                </select>
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label">State</label>
-<!--                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_state">-->
-                <select id="txt_state" class="form-control" name="example-text-input">
-                  <option value="">Select State</option>
-                </select>
-              </div>
-            </div>
-<!--            <div class="row">-->
-<!--              <div class="col-lg-12">-->
-<!--                <label class="form-label">Location</label>-->
-<!--                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_location">-->
-<!--              </div>-->
-<!--            </div>-->
-            <div class="row">
-              <div class="col-lg-4">
-                <label class="form-label">Image1</label>
-                <input class="form-control" id="uniImage1" type="file"/>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-label">Image2</label>
-                <input class="form-control" id="uniImage2" type="file"/>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-label">Image3</label>
-                <input class="form-control" id="uniImage3" type="file"/>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <label class="form-label"></label>
-                <img class="img" id="uniAvatar1" />
-              </div>
-              <div class="col-lg-4">
-                <label class="form-label"></label>
-                <img class="img" id="uniAvatar2" />
-              </div>
-              <div class="col-lg-4">
-                <label class="form-label"></label>
-                <img class="img" id="uniAvatar3" />
-              </div>
-            </div>
-
-            <div class="col-lg-12">
-              <div>
-                <label class="form-label">Description</label>
-                <textarea class="form-control" rows="3" required="true" id="txt_description"></textarea>
-              </div>
-            </div>
-
-            <label class="form-label">Admission Intakes</label>
-            <div class="form-selectgroup-boxes row mb-3">
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="report-type" value="Summer" class="form-selectgroup-input" checked>
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Summer</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="report-type" value="Spring" class="form-selectgroup-input">
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Spring</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="report-type" value="Fall" class="form-selectgroup-input" required>
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Fall</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <label class="form-label">Courses Offered</label>
-            <div class="form-selectgroup-boxes row mb-3">
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="course-type" value="Masters" class="form-selectgroup-input" checked>
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Masters</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="course-type" value="Bachelors" class="form-selectgroup-input">
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Bachelors</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="course-type" value="PG-Diplamo" class="form-selectgroup-input" required>
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">PG-Diplamo</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="mb-6">
-                  <label class="form-label">Is Recommended University</label>
-                  <select class="form-select" id="uni_recommend">
-                    <option value="true" selected>FALSE</option>
-                    <option value="true">TRUE</option>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="form-label">Country</label>
+  <!--                <input type="text" class="form-control"  placeholder="Country" id="txt_country">-->
+                  <select name="txt_country" id="txt_country" class="form-control" >
+                    <option value="">Select Country</option>
+                  </select>
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label">State</label>
+  <!--                <input type="text" class="form-control"  placeholder="State" required id="txt_state">-->
+                  <select name="txt_state" id="txt_state" class="form-control" >
+                    <option value="">Select State</option>
                   </select>
                 </div>
               </div>
-            </div>
-<!--            <div class="row">-->
-<!--              <div class="col-lg-12">-->
-<!--                <div class="mb-6">-->
-<!--                  <label class="form-label">Representative Names</label>-->
-<!--                  <select class="form-select" id="rep_names">-->
-<!--                  </select>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-            <!-- Add Representative form -->
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label">Representative Name</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Representative Name" id="txt_rep_name">
+  <!--            <div class="row">-->
+  <!--              <div class="col-lg-12">-->
+  <!--                <label class="form-label">Location</label>-->
+  <!--                <input type="text" class="form-control"  placeholder="Location" id="txt_location">-->
+  <!--              </div>-->
+  <!--            </div>-->
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="form-label">Image1</label>
+                  <input class="form-control" id="uniImage1" name="uniImage1" type="file"/>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-label">Image2</label>
+                  <input class="form-control" id="uniImage2" name="uniImage2" type="file"/>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-label">Image3</label>
+                  <input class="form-control" id="uniImage3" name="uniImage3" type="file"/>
+                </div>
               </div>
-              <div class="col-lg-6">
-                <label class="form-label">Phone Number</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Phone Number" id="txt_rep_phone">
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_uname">
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_psd">
-              </div>
-              <div class="col-lg-4">
-                <label class="form-label">Availability</label>
-                <select class="form-select" id="rep_availability">
-                  <option value="8:00-5:00" selected>8:00-5:00</option>
-                  <option value="8:30-5:30" selected>8:30-5:30</option>
-                  <option value="9:00-6:00" selected>9:00-6:00</option>
-                  <option value="9:30-6:30" selected>9:30-6:30</option>
-                  <option value="10:00-7:00" selected>10:00-7:00</option>
-                </select>
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="form-label"></label>
+                  <img class="img" id="uniAvatar1" />
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-label"></label>
+                  <img class="img" id="uniAvatar2" />
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-label"></label>
+                  <img class="img" id="uniAvatar3" />
+                </div>
               </div>
 
-              <div class="col-lg-4">
-                <label class="form-label">Profile Picture</label>
-                <input class="form-control" id="selectAvatar" type="file"/>
-              </div>
-<!--              <div class="col-lg-3">-->
-<!--                <label class="form-label">Phone Number</label>-->
-<!--                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_availability">-->
-<!--              </div>-->
-              <div class="col-lg-4">
-                <label class="form-label"></label>
-                <img class="img" id="avatar" />
-                <button class="btn btn-primary" id="btn_add_rep">Add</button>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-label"></label>
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label"></label>
-                <textarea id="textArea" rows="30" cols="50" style="display:none;"></textarea>
+              <div class="col-lg-12">
+                <div>
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" rows="3" required="true" id="txt_description" name="txt_description"></textarea>
+                </div>
               </div>
 
-            </div><br>
-            <!-- Representative details table-->
-            <div class="row">
-              <div class="col-lg-12" id="div_tbl_representative">
-                <table id="tbl_representative" class="table table-striped" style="width:100%">
-                  <thead>
-                  <tr>
-                    <th>repName</th>
-                    <th>username</th>
-                    <th>password</th>
-                    <th>phonenumber</th>
-                    <th>availability</th>
-                    <th>image</th>
-                    <th>Info</th>
-                  </tr>
-                  </thead>
-                </table>
+              <label class="form-label">Admission Intakes</label>
+              <div class="form-selectgroup-boxes row mb-3">
+                <div class="col-lg-4">
+                  <label class="form-selectgroup-item">
+                    <input type="checkbox" name="report-type" value="Summer" class="form-selectgroup-input" checked>
+                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                      <span class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                      </span>
+                      <span class="form-selectgroup-label-content">
+                        <span class="form-selectgroup-title strong mb-1">Summer</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-selectgroup-item">
+                    <input type="checkbox" name="report-type" value="Spring" class="form-selectgroup-input">
+                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                      <span class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                      </span>
+                      <span class="form-selectgroup-label-content">
+                        <span class="form-selectgroup-title strong mb-1">Spring</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-selectgroup-item">
+                    <input type="checkbox" name="report-type" value="Fall" class="form-selectgroup-input" required>
+                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                      <span class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                      </span>
+                      <span class="form-selectgroup-label-content">
+                        <span class="form-selectgroup-title strong mb-1">Fall</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
               </div>
+
+              <label class="form-label">Courses Offered</label>
+              <div class="form-selectgroup-boxes row mb-3">
+                <div class="col-lg-4">
+                  <label class="form-selectgroup-item">
+                    <input type="checkbox" name="course-type" value="Masters" class="form-selectgroup-input" checked>
+                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                      <span class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                      </span>
+                      <span class="form-selectgroup-label-content">
+                        <span class="form-selectgroup-title strong mb-1">Masters</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-selectgroup-item">
+                    <input type="checkbox" name="course-type" value="Bachelors" class="form-selectgroup-input">
+                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                      <span class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                      </span>
+                      <span class="form-selectgroup-label-content">
+                        <span class="form-selectgroup-title strong mb-1">Bachelors</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-selectgroup-item">
+                    <input type="checkbox" name="course-type" value="PG-Diplamo" class="form-selectgroup-input" required>
+                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                      <span class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                      </span>
+                      <span class="form-selectgroup-label-content">
+                        <span class="form-selectgroup-title strong mb-1">PG-Diplamo</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="mb-6">
+                    <label class="form-label">Is Recommended University</label>
+                    <select class="form-select" id="uni_recommend" name="uni_recommend">
+                      <option value="true" selected>FALSE</option>
+                      <option value="true">TRUE</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+  <!--            <div class="row">-->
+  <!--              <div class="col-lg-12">-->
+  <!--                <div class="mb-6">-->
+  <!--                  <label class="form-label">Representative Names</label>-->
+  <!--                  <select class="form-select" id="rep_names">-->
+  <!--                  </select>-->
+  <!--                </div>-->
+  <!--              </div>-->
+  <!--            </div>-->
+              <!-- Add Representative form -->
+              <div class="row">
+<!--                <form id="frm_new_representative">-->
+                  <div class="col-lg-6">
+                    <label class="form-label">Representative Name</label>
+                    <input type="text" class="form-control"  placeholder="Representative Name" id="txt_rep_name" name="txt_rep_name">
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" class="form-control"  placeholder="Phone Number" id="txt_rep_phone" name="txt_rep_phone">
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control"  placeholder="Username" id="txt_rep_uname" name="txt_rep_uname">
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control"  placeholder="Password" id="txt_rep_psd" name="txt_rep_psd">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label">Availability</label>
+                    <select class="form-select" id="rep_availability" name="rep_availability">
+                      <option value="8:00-5:00" selected>8:00-5:00</option>
+                      <option value="8:30-5:30" selected>8:30-5:30</option>
+                      <option value="9:00-6:00" selected>9:00-6:00</option>
+                      <option value="9:30-6:30" selected>9:30-6:30</option>
+                      <option value="10:00-7:00" selected>10:00-7:00</option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-4">
+                    <label class="form-label">Profile Picture</label>
+                    <input class="form-control" id="selectAvatar" name="selectAvatar" type="file"/>
+                  </div>
+    <!--              <div class="col-lg-3">-->
+    <!--                <label class="form-label">Phone Number</label>-->
+    <!--                <input type="password" class="form-control"  placeholder="Password" id="txt_rep_availability">-->
+    <!--              </div>-->
+                  <div class="col-lg-4">
+                    <label class="form-label"></label>
+                    <img class="img" id="avatar" />
+                    <button class="btn btn-primary" id="btn_add_rep" type="button">Add</button>
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label"></label>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label"></label>
+                    <textarea id="textArea" rows="30" cols="50" style="display:none;"></textarea>
+                  </div>
+<!--                </form>-->
+              </div><br>
+              <!-- Representative details table-->
+              <div class="row">
+                <div class="col-lg-12" id="div_tbl_representative">
+                  <table id="tbl_representative" class="table table-striped" style="width:100%">
+                    <thead>
+                    <tr>
+                      <th>repName</th>
+                      <th>username</th>
+                      <th>password</th>
+                      <th>phonenumber</th>
+                      <th>availability</th>
+                      <th>image</th>
+                      <th>Info</th>
+                    </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+              </form>
+              <!-- End of Add Representative form -->
             </div>
-            <!-- End of Add Representative form -->
-          </div>
           <div class="modal-footer">
             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
               Cancel
@@ -507,33 +514,33 @@
             <div class="row">
               <div class="col-lg-6">
                 <label class="form-label">University ID</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university_id" disabled>
+                <input type="text" class="form-control"  placeholder="University Name" required id="txt_university_id" disabled>
               </div>
               <div class="col-lg-6">
                 <label class="form-label">Recommended</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university_rec" disabled>
+                <input type="text" class="form-control"  placeholder="University Name" required id="txt_university_rec" disabled>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-12">
                 <label class="form-label">University Name</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="University Name" required id="txt_university_name">
+                <input type="text" class="form-control"  placeholder="University Name" required id="txt_university_name">
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6">
                 <label class="form-label">Country</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Country" id="txt_uni_country">
+                <input type="text" class="form-control"  placeholder="Country" id="txt_uni_country">
               </div>
               <div class="col-lg-6">
                 <label class="form-label">State</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="State" required id="txt_uni_state">
+                <input type="text" class="form-control"  placeholder="State" required id="txt_uni_state">
               </div>
             </div>
             <div class="row">
               <div class="col-lg-12">
                 <label class="form-label">Location</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Location" id="txt_uni_location">
+                <input type="text" class="form-control"  placeholder="Location" id="txt_uni_location">
               </div>
             </div>
 
@@ -641,11 +648,11 @@
 <!--            <div class="row">-->
 <!--              <div class="col-lg-6">-->
 <!--                <label class="form-label">Username</label>-->
-<!--                <input type="text" class="form-control" name="example-text-input" placeholder="Username" id="txt_rep_username">-->
+<!--                <input type="text" class="form-control"  placeholder="Username" id="txt_rep_username">-->
 <!--              </div>-->
 <!--              <div class="col-lg-6">-->
 <!--                <label class="form-label">Password</label>-->
-<!--                <input type="password" class="form-control" name="example-text-input" placeholder="Password" id="txt_rep_password">-->
+<!--                <input type="password" class="form-control"  placeholder="Password" id="txt_rep_password">-->
 <!--              </div>-->
 <!--            </div>-->
             <!-- Representative details table-->
@@ -688,7 +695,8 @@
     <script src="/js/tabler.min.js?1684106062" defer></script>
     <script src="/js/demo.min.js?1684106062" defer></script>
 
-    <script>
+  </body>
+  <script>
 
         $(document).ready(function() {
           // Data table creation
@@ -822,6 +830,11 @@
 
           // onclick btn_add_rep Add button to add representative.
           $('#btn_add_rep').click(function(){
+              addNewRepresentative();
+          });
+
+          // Add representative to table.
+          function addNewRepresentative(){
             console.log("On click ADD representative...");
             var repName = $('#txt_rep_name').val();
             var repUserName = $('#txt_rep_uname').val();
@@ -836,7 +849,7 @@
             $('#txt_rep_uname').val('');
             $('#txt_rep_psd').val('');
             $('#avatar').attr('src', '');
-          });
+          }
 
           // btn_remove_rep onclick remove representative from table row.
           $('#tbl_representative').on('click', 'button#btn_remove_rep', function(){
@@ -846,6 +859,14 @@
 
           // onclick for save button in add university
           $('#btn_save').click(function(){
+            var flag = $('#frm_new_university').valid();
+            if(flag){
+              saveNewUniversity();
+            }
+          });
+
+          // Save new university.
+          function saveNewUniversity(){
             console.log("On click save university...");
             var university = $('#txt_university').val();
             var description = $('#txt_description').val();
@@ -855,6 +876,13 @@
             var state = $('#txt_state :selected').text();
             var country = $('#txt_country :selected').text();
             var repname = $('#rep_names :selected').text();
+
+            var uniAvatar1 = $('#uniAvatar1').attr('src');
+            var uniAvatar2 = $('#uniAvatar2').attr('src');
+            var uniAvatar3 = $('#uniAvatar3').attr('src');
+
+            var images = [uniAvatar1, uniAvatar2, uniAvatar3];
+
             var checkboxValues = [];
             $('input[name="report-type"]:checked').map(function() {
                 checkboxValues.push($(this).val());
@@ -893,7 +921,8 @@
                           "country":country,
                           "course":courseTypeValues.toString(),
                           "isRecommended": isRecommended.toString(),
-                          "representatives":JSON.stringify(rows)
+                          "representatives":JSON.stringify(rows),
+                          "images":images
                         }
             saveUniversity();
             function saveUniversity() {
@@ -918,7 +947,7 @@
               });
             }
             console.log(payload);
-          });
+          }
 
 
           // onclick for update button in add university
@@ -997,6 +1026,51 @@
               });
             }
             console.log(payload);
+          });
+
+          // Form validation for new university.
+          $("#frm_new_university").validate({
+            rules: {
+              'txt_university': {required: true },
+              'txt_country': {required: true},
+              'txt_state': {required: true},
+              'uniImage1': {required: true},
+              'uniImage2': {required: true},
+              'uniImage3': {required: true},
+              'txt_description': {required: true},
+              'uni_recommend': {required: true},
+              'report-type': {required: true},
+              'course-type': {required: true}
+            },
+            messages: {
+              'txt_university': {required: "University name is required."},
+              'txt_country': {required: "Country is required."},
+              'txt_state': {required: "State is required."},
+              'uniImage1': {required: "Image is required."},
+              'uniImage2': {required: "Image is required."},
+              'uniImage3': {required: "Image is required."},
+              'txt_description': {required: "College description is required."},
+              'uni_recommend': {required: "Is college recommended."},
+              'report-type': {required: "Report type required."},
+              'course-type': {required: "Course type required."}
+            }
+          });
+
+          $("#frm_new_representative").validate({
+            rules: {
+              'txt_rep_name': {required: true },
+              'txt_rep_phone': {required: true},
+              'txt_rep_uname': {required: true},
+              'txt_rep_psd': {required: true},
+              'selectAvatar': {required: true}
+            },
+            messages: {
+              'txt_rep_name': {required: "Representative name is required."},
+              'txt_rep_phone': {required: "Phone number is required."},
+              'txt_rep_uname': {required: "Username is required."},
+              'txt_rep_psd': {required: "Password is required."},
+              'selectAvatar': {required: "Image is required."}
+            }
           });
         });
 
@@ -1087,5 +1161,4 @@
           uploadUniImage(e, "uniAvatar3");
         });
     </script>
-  </body>
 </html>
