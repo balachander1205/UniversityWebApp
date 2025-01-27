@@ -15,3 +15,26 @@ div#div-card-body {
 li.nav-item.active {
     background: #206bc438;
 }
+td {
+    height: 20px;
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    margin: 0 5px 0 5px;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #000;
+}
+table {
+    font-size: 10px;
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}

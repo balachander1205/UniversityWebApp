@@ -71,6 +71,8 @@
       }label.error {
           color: red;
           font-size: 12px;
+      }span.GFG {
+          font-size: 10px;
       }
     </style>
   </head>
@@ -243,7 +245,7 @@
               <div class="row">
                 <div class="col-lg-12">
                   <label class="form-label">University Name</label>
-                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_university" name="txt_university">
+                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_university" name="txt_university" maxlength="100">
                 </div>
               </div>
               <div class="row">
@@ -299,8 +301,8 @@
 
               <div class="col-lg-12">
                 <div>
-                  <label class="form-label">Description</label>
-                  <textarea class="form-control" rows="3" required="true" id="txt_description" name="txt_description"></textarea>
+                  <label class="form-label">Description&nbsp;&nbsp;<span class="GFG">500</span></label>
+                  <textarea class="form-control" rows="3" required="true" id="txt_description" name="txt_description" maxlength="500"></textarea>
                 </div>
               </div>
 
@@ -414,19 +416,19 @@
 <!--                <form id="frm_new_representative">-->
                   <div class="col-lg-6">
                     <label class="form-label">Representative Name</label>
-                    <input type="text" class="form-control"  placeholder="Representative Name" id="txt_rep_name" name="txt_rep_name">
+                    <input type="text" class="form-control"  placeholder="Representative Name" id="txt_rep_name" name="txt_rep_name" maxlength="100">
                   </div>
                   <div class="col-lg-6">
                     <label class="form-label">Phone Number</label>
-                    <input type="text" class="form-control"  placeholder="Phone Number" id="txt_rep_phone" name="txt_rep_phone">
+                    <input type="text" class="form-control"  placeholder="Phone Number" id="txt_rep_phone" name="txt_rep_phone" maxlength="15">
                   </div>
                   <div class="col-lg-6">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control"  placeholder="Username" id="txt_rep_uname" name="txt_rep_uname">
+                    <input type="text" class="form-control"  placeholder="Username" id="txt_rep_uname" name="txt_rep_uname" maxlength="10">
                   </div>
                   <div class="col-lg-6">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control"  placeholder="Password" id="txt_rep_psd" name="txt_rep_psd">
+                    <input type="password" class="form-control"  placeholder="Password" id="txt_rep_psd" name="txt_rep_psd" maxlength="10">
                   </div>
                   <div class="col-lg-4">
                     <label class="form-label">Availability</label>
@@ -1071,6 +1073,13 @@
               'txt_rep_psd': {required: "Password is required."},
               'selectAvatar': {required: "Image is required."}
             }
+          });
+
+          // Display university description remaining characters..
+          var max_length = 500;
+          $('textarea#txt_description').keyup(function () {
+              var len = max_length - $(this).val().length;
+              $('.GFG').text(len+"/"+max_length);
           });
         });
 
