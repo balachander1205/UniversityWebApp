@@ -20,8 +20,10 @@ public class ImageUploadUtils {
             System.out.println(response);
             JSONObject data = new JSONObject(response.getBody().toString());
             System.out.println(data);
-            JSONObject dataObj = data.getJSONObject("data");
-            imageURL = dataObj.getString("display_url");
+            if(data!=null && !data.isNull("data")){
+                JSONObject dataObj = data.getJSONObject("data");
+                imageURL = dataObj.getString("display_url");
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
