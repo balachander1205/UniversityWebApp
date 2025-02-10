@@ -74,6 +74,13 @@
       }span.GFG {
           font-size: 10px;
       }
+      #img-rep-pic {
+          width: 50px;
+          border-radius: 100%;
+          height: 50px;
+          border: 1px solid #206bc447;
+          padding: 2px;
+      }
     </style>
   </head>
   <body>
@@ -138,7 +145,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="./universityDetails" >
                     <span class="nav-link-title">
                       Universities
@@ -159,7 +166,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                   <a class="nav-link" href="./representativeDetails" >
                     <span class="nav-link-title">
                       Representatives
@@ -179,23 +186,8 @@
               <div class="col">
                 <!-- Page pre-title -->
                 <h2 class="page-title">
-                  University Details
+                  Representative Details
                 </h2>
-              </div>
-              <!-- Page title actions -->
-              <div class="col-auto ms-auto d-print-none">
-                <div class="btn-list">
-                  <a href="#">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                  </a>
-                  <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-                    Add University
-                  </a>
-<!--                  <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">-->
-<!--                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>-->
-<!--                  </a>-->
-                </div>
               </div>
             </div>
           </div>
@@ -210,16 +202,15 @@
                     <table id="tbl_university" class="table table-striped" style="width:100%">
                       <thead>
                       <tr>
+                        <th>ID</th>
+                        <th>Profile</th>
+                        <th>Rep Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Availability</th>
                         <th>University ID</th>
-                        <th>University Name</th>
-                        <th>Description</th>
-                        <th>Location</th>
-                        <th>state</th>
-                        <th>Country Code</th>
-                        <th>Recommended</th>
-                        <th>Position</th>
-                        <th>Admission Intakes</th>
-                        <th>Course Type</th>
                         <th></th>
                       </tr>
                       </thead>
@@ -511,7 +502,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">University Details</h5>
+            <h5 class="modal-title">Representative Details</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
@@ -522,166 +513,46 @@
 
             <div class="row">
               <div class="col-lg-6">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-control"  placeholder="University Name" required id="txt_row_id" disabled>
+              </div>
+              <div class="col-lg-6">
                 <label class="form-label">University ID</label>
                 <input type="text" class="form-control"  placeholder="University Name" required id="txt_university_id" disabled>
               </div>
-              <div class="col-lg-6">
-                <label class="form-label">Recommended</label>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <label class="form-label">Representative Name</label>
                 <input type="text" class="form-control"  placeholder="University Name" required id="txt_university_rec" disabled>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-12">
-                <label class="form-label">University Name</label>
-                <input type="text" class="form-control"  placeholder="University Name" required id="txt_university_name">
+              <div class="col-lg-6">
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control"  placeholder="Email" required id="txt_rep_email">
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Phone Number</label>
+                <input type="text" class="form-control"  placeholder="Phone Number" required id="txt_rep_phone_no">
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6">
-                <label class="form-label">Country</label>
-                <input type="text" class="form-control"  placeholder="Country" id="txt_uni_country">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control"  placeholder="Country" id="txt_rep_username">
               </div>
               <div class="col-lg-6">
-                <label class="form-label">State</label>
-                <input type="text" class="form-control"  placeholder="State" required id="txt_uni_state">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control"  placeholder="State" required id="txt_rep_password">
               </div>
             </div>
             <div class="row">
               <div class="col-lg-12">
-                <label class="form-label">Location</label>
+                <label class="form-label">Availability</label>
                 <input type="text" class="form-control"  placeholder="Location" id="txt_uni_location">
               </div>
             </div>
-
-            <div class="col-lg-12">
-              <div>
-                <label class="form-label">Description</label>
-                <textarea class="form-control" rows="3" required="true" id="txt_uni_description"></textarea>
-              </div>
-            </div>
-
-            <label class="form-label">Admission Intakes</label>
-            <div class="form-selectgroup-boxes row mb-3">
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="report-type" value="Summer" class="form-selectgroup-input" checked>
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Summer</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="report-type" value="Spring" class="form-selectgroup-input">
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Spring</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="report-type" value="Fall" class="form-selectgroup-input" required>
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Fall</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <label class="form-label">Courses</label>
-            <div class="form-selectgroup-boxes row mb-3">
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="uni-report-type" id="uni-report-type" value="Masters" class="form-selectgroup-input" checked>
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Masters</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="uni-report-type" id="uni-report-type" value="Bachelors" class="form-selectgroup-input">
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Bachelors</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-              <div class="col-lg-4">
-                <label class="form-selectgroup-item">
-                  <input type="checkbox" name="uni-report-type" id="uni-report-type" value="PG-Diploma" class="form-selectgroup-input" required>
-                  <span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">PG-Diploma</span>
-                    </span>
-                  </span>
-                </label>
-              </div>
-            </div>
-<!--            <div class="row">-->
-<!--              <div class="col-lg-12">-->
-<!--                <div class="mb-6">-->
-<!--                  <label class="form-label">Representative Names</label>-->
-<!--                  <select class="form-select" id="txt_rep_names">-->
-<!--                  </select>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--              <div class="col-lg-6">-->
-<!--                <label class="form-label">Username</label>-->
-<!--                <input type="text" class="form-control"  placeholder="Username" id="txt_rep_username">-->
-<!--              </div>-->
-<!--              <div class="col-lg-6">-->
-<!--                <label class="form-label">Password</label>-->
-<!--                <input type="password" class="form-control"  placeholder="Password" id="txt_rep_password">-->
-<!--              </div>-->
-<!--            </div>-->
-            <!-- Representative details table-->
-            <div class="row">
-              <div class="col-lg-12" id="div_tbl_representative">
-                <table id="tbl_representative_details" class="table table-striped" style="width:100%">
-                  <thead>
-                  <tr>
-                    <th>repName</th>
-                    <th>username</th>
-<!--                    <th>password</th>-->
-                    <th>phonenumber</th>
-                    <th>availability</th>
-                    <th>Image</th>
-                  </tr>
-                  </thead>
-                </table>
-              </div>
-            </div>
-            <!-- End of Add Representative form -->
           </div>
           <div class="modal-footer">
             <button class="btn btn-success" id="btn_update" type="button">Update</button>
@@ -710,9 +581,8 @@
         $(document).ready(function() {
           // Data table creation
           $("#tbl_university").DataTable();
-          var testDataUrl = "/api/getAllUniversities"
+          var testDataUrl = "/api/getAllRepresentatives "
           loadData();
-          getAllCountries();
           function loadData() {
             $.ajax({
               type: 'POST',
@@ -735,30 +605,22 @@
             console.log("populating university data table...");
             console.log(data);
             $("#tbl_university").DataTable().clear();
-            var length = data.universities.length;
+            var length = data.length;
             for(var i = 0; i < length; i++) {
-              var university = data.universities[i];
+              var university = data[i];
               $('#tbl_university').dataTable().fnAddData( [
+                university.id,
+                '<img id="img-rep-pic" src="'+university.profilepic+'">',
+                university.repname,
+                university.email,
+                university.phonenumber,
+                university.username,
+                university.password,
+                university.availability,
                 university.universityid,
-                university.universityname,
-                university.description,
-                university.location,
-                university.state,
-                university.countrycode,
-                university.isrecommended,
-                university.position,
-                university.admissionintake,
-                university.coursetype,
                 '<button class="btn btn-primary" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
               ]);
             }
-            console.log(data.representatives);
-            var mySelect = $('#rep_names');
-            $.each(data.representatives, function(val, text) {
-                mySelect.append(
-                    $('<option></option>').val(val).html(text)
-                );
-            });
           }
           // Data table creation END -----
 
