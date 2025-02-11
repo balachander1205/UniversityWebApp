@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Universities.</title>
+    <title>Representatives.</title>
     <!-- CSS files -->
     <link href="/css/tabler.min.css?1684106062" rel="stylesheet"/>
     <link href="/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
@@ -225,279 +225,7 @@
       </div>
     </div>
 
-    <!-- New university modal window  -->
-    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">New University</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-
-          <div class="modal-body">
-            <form id="frm_new_university">
-              <div class="mb-3">
-                <label class="form-label" id="txt_message" style="color:green"></label>
-              </div>
-
-              <div class="row">
-                <div class="col-lg-12">
-                  <label class="form-label">University Name</label>
-                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_university" name="txt_university" maxlength="100">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <label class="form-label">Country</label>
-  <!--                <input type="text" class="form-control"  placeholder="Country" id="txt_country">-->
-                  <select name="txt_country" id="txt_country" class="form-control" >
-                    <option value="">Select Country</option>
-                  </select>
-                </div>
-                <div class="col-lg-6">
-                  <label class="form-label">State</label>
-  <!--                <input type="text" class="form-control"  placeholder="State" required id="txt_state">-->
-                  <select name="txt_state" id="txt_state" class="form-control" >
-                    <option value="">Select State</option>
-                  </select>
-                </div>
-              </div>
-  <!--            <div class="row">-->
-  <!--              <div class="col-lg-12">-->
-  <!--                <label class="form-label">Location</label>-->
-  <!--                <input type="text" class="form-control"  placeholder="Location" id="txt_location">-->
-  <!--              </div>-->
-  <!--            </div>-->
-              <div class="row">
-                <div class="col-lg-4">
-                  <label class="form-label">Image1</label>
-                  <input class="form-control" id="uniImage1" name="uniImage1" type="file"/>
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-label">Image2</label>
-                  <input class="form-control" id="uniImage2" name="uniImage2" type="file"/>
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-label">Image3</label>
-                  <input class="form-control" id="uniImage3" name="uniImage3" type="file"/>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-4">
-                  <label class="form-label"></label>
-                  <img class="img" id="uniAvatar1" />
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-label"></label>
-                  <img class="img" id="uniAvatar2" />
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-label"></label>
-                  <img class="img" id="uniAvatar3" />
-                </div>
-              </div>
-
-              <div class="col-lg-12">
-                <div>
-                  <label class="form-label">Description&nbsp;&nbsp;<span class="GFG">500</span></label>
-                  <textarea class="form-control" rows="3" required="true" id="txt_description" name="txt_description" maxlength="500"></textarea>
-                </div>
-              </div>
-
-              <label class="form-label">Admission Intakes</label>
-              <div class="form-selectgroup-boxes row mb-3">
-                <div class="col-lg-4">
-                  <label class="form-selectgroup-item">
-                    <input type="checkbox" name="report-type" value="Summer" class="form-selectgroup-input" checked>
-                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                      <span class="me-3">
-                        <span class="form-selectgroup-check"></span>
-                      </span>
-                      <span class="form-selectgroup-label-content">
-                        <span class="form-selectgroup-title strong mb-1">Summer</span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-selectgroup-item">
-                    <input type="checkbox" name="report-type" value="Spring" class="form-selectgroup-input">
-                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                      <span class="me-3">
-                        <span class="form-selectgroup-check"></span>
-                      </span>
-                      <span class="form-selectgroup-label-content">
-                        <span class="form-selectgroup-title strong mb-1">Spring</span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-selectgroup-item">
-                    <input type="checkbox" name="report-type" value="Fall" class="form-selectgroup-input" required>
-                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                      <span class="me-3">
-                        <span class="form-selectgroup-check"></span>
-                      </span>
-                      <span class="form-selectgroup-label-content">
-                        <span class="form-selectgroup-title strong mb-1">Fall</span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-              </div>
-
-              <label class="form-label">Courses Offered</label>
-              <div class="form-selectgroup-boxes row mb-3">
-                <div class="col-lg-4">
-                  <label class="form-selectgroup-item">
-                    <input type="checkbox" name="course-type" value="Masters" class="form-selectgroup-input" checked>
-                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                      <span class="me-3">
-                        <span class="form-selectgroup-check"></span>
-                      </span>
-                      <span class="form-selectgroup-label-content">
-                        <span class="form-selectgroup-title strong mb-1">Masters</span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-selectgroup-item">
-                    <input type="checkbox" name="course-type" value="Bachelors" class="form-selectgroup-input">
-                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                      <span class="me-3">
-                        <span class="form-selectgroup-check"></span>
-                      </span>
-                      <span class="form-selectgroup-label-content">
-                        <span class="form-selectgroup-title strong mb-1">Bachelors</span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-selectgroup-item">
-                    <input type="checkbox" name="course-type" value="PG-Diplamo" class="form-selectgroup-input" required>
-                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                      <span class="me-3">
-                        <span class="form-selectgroup-check"></span>
-                      </span>
-                      <span class="form-selectgroup-label-content">
-                        <span class="form-selectgroup-title strong mb-1">PG-Diplamo</span>
-                      </span>
-                    </span>
-                  </label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="mb-6">
-                    <label class="form-label">Is Recommended University</label>
-                    <select class="form-select" id="uni_recommend" name="uni_recommend">
-                      <option value="true" selected>FALSE</option>
-                      <option value="true">TRUE</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-  <!--            <div class="row">-->
-  <!--              <div class="col-lg-12">-->
-  <!--                <div class="mb-6">-->
-  <!--                  <label class="form-label">Representative Names</label>-->
-  <!--                  <select class="form-select" id="rep_names">-->
-  <!--                  </select>-->
-  <!--                </div>-->
-  <!--              </div>-->
-  <!--            </div>-->
-              <!-- Add Representative form -->
-              <div class="row">
-<!--                <form id="frm_new_representative">-->
-                  <div class="col-lg-6">
-                    <label class="form-label">Representative Name</label>
-                    <input type="text" class="form-control"  placeholder="Representative Name" id="txt_rep_name" name="txt_rep_name" maxlength="100">
-                  </div>
-                  <div class="col-lg-6">
-                    <label class="form-label">Phone Number</label>
-                    <input type="text" class="form-control"  placeholder="Phone Number" id="txt_rep_phone" name="txt_rep_phone" maxlength="15">
-                  </div>
-                  <div class="col-lg-6">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-control"  placeholder="Username" id="txt_rep_uname" name="txt_rep_uname" maxlength="10">
-                  </div>
-                  <div class="col-lg-6">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control"  placeholder="Password" id="txt_rep_psd" name="txt_rep_psd" maxlength="10">
-                  </div>
-                  <div class="col-lg-4">
-                    <label class="form-label">Availability</label>
-                    <select class="form-select" id="rep_availability" name="rep_availability">
-                      <option value="8:00-5:00" selected>8:00-5:00</option>
-                      <option value="8:30-5:30" selected>8:30-5:30</option>
-                      <option value="9:00-6:00" selected>9:00-6:00</option>
-                      <option value="9:30-6:30" selected>9:30-6:30</option>
-                      <option value="10:00-7:00" selected>10:00-7:00</option>
-                    </select>
-                  </div>
-
-                  <div class="col-lg-4">
-                    <label class="form-label">Profile Picture</label>
-                    <input class="form-control" id="selectAvatar" name="selectAvatar" type="file"/>
-                  </div>
-    <!--              <div class="col-lg-3">-->
-    <!--                <label class="form-label">Phone Number</label>-->
-    <!--                <input type="password" class="form-control"  placeholder="Password" id="txt_rep_availability">-->
-    <!--              </div>-->
-                  <div class="col-lg-4">
-                    <label class="form-label"></label>
-                    <img class="img" id="avatar" />
-                    <button class="btn btn-primary" id="btn_add_rep" type="button">Add</button>
-                  </div>
-                  <div class="col-lg-4">
-                    <label class="form-label"></label>
-                  </div>
-                  <div class="col-lg-6">
-                    <label class="form-label"></label>
-                    <textarea id="textArea" rows="30" cols="50" style="display:none;"></textarea>
-                  </div>
-<!--                </form>-->
-              </div><br>
-              <!-- Representative details table-->
-              <div class="row">
-                <div class="col-lg-12" id="div_tbl_representative">
-                  <table id="tbl_representative" class="table table-striped" style="width:100%">
-                    <thead>
-                    <tr>
-                      <th>repName</th>
-                      <th>username</th>
-                      <th>password</th>
-                      <th>phonenumber</th>
-                      <th>availability</th>
-                      <th>image</th>
-                      <th>Info</th>
-                    </tr>
-                    </thead>
-                  </table>
-                </div>
-              </div>
-              </form>
-              <!-- End of Add Representative form -->
-            </div>
-          <div class="modal-footer">
-            <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-              Cancel
-            </a>
-<!--            <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">-->
-<!--            <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="">-->
-<!--              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>-->
-<!--              Save-->
-<!--            </a>-->
-            <button type="button" class="btn btn-primary" id="btn_save">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- university details modal window  -->
+    <!-- Representative details modal window  -->
     <div class="modal modal-blur fade" id="modal-report-university" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -508,7 +236,7 @@
 
           <div class="modal-body">
             <div class="mb-3">
-              <label class="form-label" id="txt_uni_message" style="color:green"></label>
+              <img id="img-rep-profile-pic" src="">
             </div>
 
             <div class="row">
@@ -550,16 +278,15 @@
             <div class="row">
               <div class="col-lg-12">
                 <label class="form-label">Availability</label>
-                <input type="text" class="form-control"  placeholder="Location" id="txt_uni_location">
+                <input type="text" class="form-control"  placeholder="Location" id="txt_rep_availability">
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success" id="btn_update" type="button">Update</button>
+<!--            <button class="btn btn-success" id="btn_update" type="button">Update</button>-->
             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
               Cancel
             </a>
-<!--            <button type="button" class="btn btn-primary" id="btn_uni_save">Save</button>-->
           </div>
         </div>
       </div>
@@ -576,7 +303,8 @@
     <script src="/js/demo.min.js?1684106062" defer></script>
 
   </body>
-  <script>
+</html>
+<script>
 
         $(document).ready(function() {
           // Data table creation
@@ -631,48 +359,26 @@
             console.log($row);
             var $tds = $row.find("td");
             console.log($tds);
-            var universityId = $tds[0].innerText;
-            $('#txt_university_id').val(universityId);
-            $('#txt_university_name').val($tds[1].innerText);
-            $('#txt_uni_location').val($tds[3].innerText);
-            $('#txt_uni_state').val($tds[4].innerText);
-            $('#txt_uni_description').val($tds[2].innerText);
-            $('#txt_university_rec').val($tds[6].innerText);
-            $('#txt_uni_country').val($tds[5].innerText);
+            var rowID = $tds[0].innerText;
+            var repImage = $tds[1].innerText;
+            var repName = $tds[2].innerText;
+            var repEmail = $tds[3].innerText;
+            var phone = $tds[4].innerText;
+            var username = $tds[5].innerText;
+            var password = $tds[6].innerText;
+            var availability = $tds[7].innerText;
+            var universityID = $tds[8].innerText;
+
+            $('#img-rep-profile-pic').attr('src', repImage);
+            $('#txt_row_id').val(rowID);
+            $('#txt_university_id').val(universityID);
+            $('#txt_university_rec').val(repName);
+            $('#txt_rep_email').val(repEmail);
+            $('#txt_rep_phone_no').val(phone);
+            $('#txt_rep_username').val(username);
+            $('#txt_rep_password').val(password);
+            $('#txt_rep_availability').val(availability);
             $('#modal-report-university').modal('show');
-
-            // Clear all check boxes
-            $("input[name='report-type']").each(function() { this.checked = false; });
-            $("input[name='uni-report-type']").each(function() { this.checked = false; });
-
-            // set selected values in checkbox for admissions intake
-            var admissionintake = $tds[8].innerText;
-            var admissions = admissionintake.split(',');
-            console.log(admissions);
-            $(admissions).each(function(i, item){
-                console.log(item);
-                $("input[name='report-type']").each(function(e){
-                    if($(this).val() == item){
-                        $(this).prop("checked", true);
-                    }
-                });
-            });
-
-            // set selected values in checkbox for courses offered
-            var courseType = $tds[9].innerText;
-            var courses = courseType.split(',');
-            console.log(courses);
-            $(courses).each(function(i, item){
-                console.log(item);
-                $("input[name='uni-report-type']").each(function(e){
-                    if($(this).val() == item){
-                        $(this).prop("checked", true);
-                    }
-                });
-            });
-            // populate representatives table in modal window
-            getRepresentativeByUniversityId(universityId);
-
           });
           // End of View Details button...
 
@@ -1039,4 +745,3 @@
           uploadUniImage(e, "uniAvatar3");
         });
     </script>
-</html>
