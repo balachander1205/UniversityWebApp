@@ -3,6 +3,7 @@ package com.api.university.controller.representative;
 import com.api.university.entity.AppointmentsEntity;
 import com.api.university.entity.RepresentativeEntity;
 import com.api.university.model.LoginModel;
+import com.api.university.model.RepresentativeModel;
 import com.api.university.service.RepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,5 +63,14 @@ public class RepresentativeController {
     public ResponseEntity getRepresentativeByUniversityId(@RequestParam("universityId") String universityId){
         List<RepresentativeEntity> data = representativeService.getRepresentativeByUniversityId(universityId);
         return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/addRepresentative")
+    @ResponseBody
+    public ResponseEntity addRepresentative(@RequestBody RepresentativeModel representativeModel){
+        representativeService.createRepresentative(representativeModel.getRepName(), representativeModel.getRepEmail(), representativeModel.getRepMobile(),
+                representativeModel.getProfilePic(), representativeModel.getUsername(), representativeModel.getPassword(), representativeModel.getUniversityID(),
+                representativeModel.getAvailability());
+        return ResponseEntity.ok("Representative added successfully");
     }
 }

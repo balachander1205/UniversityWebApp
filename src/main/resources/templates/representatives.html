@@ -189,6 +189,17 @@
                   Representative Details
                 </h2>
               </div>
+              <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+                  <a href="#">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                  </a>
+                  <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                    Add Representative
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -220,6 +231,89 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Representative modal window  -->
+    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">New Representative</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <form id="frm_new_university">
+              <div class="mb-3">
+                <label class="form-label" id="txt_message" style="color:green"></label>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <label class="form-label">Representative Name</label>
+                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_repr_name" name="txt_repr_name" maxlength="100">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="form-label">Profile Image</label>
+                  <input class="form-control" id="uniImage1" name="uniImage1" type="file"/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="form-label"></label>
+                  <img class="img" id="uniAvatar1" />
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-lg-6">
+                    <label class="form-label">Email</label>
+                    <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_email_id" name="txt_rep_email_id" maxlength="100">
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label">Mobile</label>
+                    <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_mobile" name="txt_rep_mobile" maxlength="100">
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="form-label">Username</label>
+                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_user_name" name="txt_rep_user_name" maxlength="100">
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label">Password</label>
+                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_pswd" name="txt_rep_pswd" maxlength="100">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="form-label">Availability</label>
+                  <select class="form-select" id="rep_availability" name="rep_availability">
+                    <option value="8:00-5:00" selected>8:00-5:00</option>
+                    <option value="8:30-5:30" selected>8:30-5:30</option>
+                    <option value="9:00-6:00" selected>9:00-6:00</option>
+                    <option value="9:30-6:30" selected>9:30-6:30</option>
+                    <option value="10:00-7:00" selected>10:00-7:00</option>
+                  </select>
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-label">University ID</label>
+                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_university_id" name="txt_rep_university_id" maxlength="100">
+                </div>
+              </div>
+            </form>
+            <!-- End of Add Representative form -->
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+              Cancel
+            </a>
+            <button type="button" class="btn btn-primary" id="btn_save_rep">Save</button>
           </div>
         </div>
       </div>
@@ -435,78 +529,44 @@
           });
 
           // onclick for save button in add university
-          $('#btn_save').click(function(){
+          $('#btn_save_rep').click(function(){
             var flag = $('#frm_new_university').valid();
             if(flag){
-              saveNewUniversity();
+              saveNewRepresentative();
             }
           });
 
           // Save new university.
-          function saveNewUniversity(){
+          function saveNewRepresentative(){
             console.log("On click save university...");
-            var university = $('#txt_university').val();
-            var description = $('#txt_description').val();
-            var location = $('#txt_location').val();
-            var username = $('#txt_username').val();
-            var password = $('#txt_username').val();
-            var state = $('#txt_state :selected').text();
-            var country = $('#txt_country :selected').text();
-            var repname = $('#rep_names :selected').text();
+            var repName = $('#txt_repr_name').val();
+            var repEmail = $('#txt_rep_email_id').val();
+            var repMobile = $('#txt_rep_mobile').val();
+            var username = $('#txt_rep_user_name').val();
+            var password = $('#txt_rep_pswd').val();
+            var availability = $('#rep_availability :selected').text();
+            var universityID = $('#txt_rep_university_id').val();
 
             var uniAvatar1 = $('#uniAvatar1').attr('src');
-            var uniAvatar2 = $('#uniAvatar2').attr('src');
-            var uniAvatar3 = $('#uniAvatar3').attr('src');
 
-            var images = [uniAvatar1, uniAvatar2, uniAvatar3];
-
-            var checkboxValues = [];
-            $('input[name="report-type"]:checked').map(function() {
-                checkboxValues.push($(this).val());
-            });
-            var courseTypeValues = [];
-            $('input[name="course-type"]:checked').map(function() {
-                courseTypeValues.push($(this).val());
-            });
-            var isRecommended = $('#uni_recommend').find(":selected").val();
-            // convert representative table into json
-            var header = [];
-            var rows = [];
-            $("#tbl_representative thead tr th").each(function (i, th) {
-                header.push($(th).html());
-            });
-            $("#tbl_representative tr:has(td)").each(function (i, tr) {
-                var row = {};
-                $(tr).find('td').each(function (j, td) {
-                    row[header[j]] = $(td).html();
-                });
-                rows.push(row);
-            });
-            console.log('Table Rows:', rows);
-            console.log(JSON.stringify(rows));
-            console.log(university, description, location, username, password, checkboxValues, courseTypeValues);
+            var images = [uniAvatar1];
 
             var payload = {
-                          "admissionintake": checkboxValues.toString(),
-                          "description": description,
-                          "location": location,
-                          "password": password,
-                          "repname": "",
-                          "universityname": university,
-                          "username": username,
-                          "state":state,
-                          "country":country,
-                          "course":courseTypeValues.toString(),
-                          "isRecommended": isRecommended.toString(),
-                          "representatives":JSON.stringify(rows),
-                          "images":images
-                        }
+                "repEmail":repEmail,
+                "profilePic":uniAvatar1,
+                "repMobile":repMobile,
+                "repName":repName,
+                "availability":availability,
+                "username":username,
+                "password":password,
+                "universityID":universityID
+            }
             saveUniversity();
             function saveUniversity() {
               console.log("Inside saveUniversity...")
               $.ajax({
                 type: 'POST',
-                url: '/api/addUniversity',
+                url: '/api/addRepresentative',
                 contentType: "application/json",
                 dataType: 'json',
                 data: JSON.stringify(payload),
@@ -605,47 +665,22 @@
             console.log(payload);
           });
 
-          // Form validation for new university.
+          // Form validation for new representative.
           $("#frm_new_university").validate({
             rules: {
-              'txt_university': {required: true },
-              'txt_country': {required: true},
-              'txt_state': {required: true},
-              'uniImage1': {required: true},
-              'uniImage2': {required: true},
-              'uniImage3': {required: true},
-              'txt_description': {required: true},
-              'uni_recommend': {required: true},
-              'report-type': {required: true},
-              'course-type': {required: true}
-            },
-            messages: {
-              'txt_university': {required: "University name is required."},
-              'txt_country': {required: "Country is required."},
-              'txt_state': {required: "State is required."},
-              'uniImage1': {required: "Image is required."},
-              'uniImage2': {required: "Image is required."},
-              'uniImage3': {required: "Image is required."},
-              'txt_description': {required: "College description is required."},
-              'uni_recommend': {required: "Is college recommended."},
-              'report-type': {required: "Report type required."},
-              'course-type': {required: "Course type required."}
-            }
-          });
-
-          $("#frm_new_representative").validate({
-            rules: {
-              'txt_rep_name': {required: true },
-              'txt_rep_phone': {required: true},
-              'txt_rep_uname': {required: true},
-              'txt_rep_psd': {required: true},
+              'txt_repr_name': {required: true },
+              'txt_rep_email_id': {required: true},
+              'txt_rep_mobile': {required: true},
+              'txt_rep_user_name': {required: true},
+              'txt_rep_pswd': {required: true},
               'selectAvatar': {required: true}
             },
             messages: {
-              'txt_rep_name': {required: "Representative name is required."},
-              'txt_rep_phone': {required: "Phone number is required."},
-              'txt_rep_uname': {required: "Username is required."},
-              'txt_rep_psd': {required: "Password is required."},
+              'txt_repr_name': {required: "Representative name is required."},
+              'txt_rep_mobile': {required: "Email ID is required."},
+              'txt_rep_mobile': {required: "Phone number is required."},
+              'txt_rep_user_name': {required: "Username is required."},
+              'txt_rep_pswd': {required: "Password is required."},
               'selectAvatar': {required: "Image is required."}
             }
           });
