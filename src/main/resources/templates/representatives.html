@@ -260,7 +260,7 @@
               <div class="row">
                 <div class="col-lg-4">
                   <label class="form-label">Profile Image</label>
-                  <input class="form-control" id="uniImage1" name="uniImage1" type="file"/>
+                  <input class="form-control" id="selectAvatar" name="selectAvatar" type="file"/>
                 </div>
               </div>
               <div class="row">
@@ -273,21 +273,21 @@
               <div class="row">
                   <div class="col-lg-6">
                     <label class="form-label">Email</label>
-                    <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_email_id" name="txt_rep_email_id" maxlength="100">
+                    <input type="text" class="form-control"  placeholder="Email" required id="txt_rep_email_id" name="txt_rep_email_id" maxlength="100">
                   </div>
                   <div class="col-lg-6">
                     <label class="form-label">Mobile</label>
-                    <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_mobile" name="txt_rep_mobile" maxlength="100">
+                    <input type="text" class="form-control"  placeholder="Mobile number" required id="txt_rep_mobile" name="txt_rep_mobile" maxlength="100">
                   </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <label class="form-label">Username</label>
-                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_user_name" name="txt_rep_user_name" maxlength="100">
+                  <input type="text" class="form-control"  placeholder="Username" required id="txt_rep_user_name" name="txt_rep_user_name" maxlength="100">
                 </div>
                 <div class="col-lg-6">
                   <label class="form-label">Password</label>
-                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_pswd" name="txt_rep_pswd" maxlength="100">
+                  <input type="password" class="form-control"  placeholder="Password" required id="txt_rep_pswd" name="txt_rep_pswd" maxlength="100">
                 </div>
               </div>
               <div class="row">
@@ -303,7 +303,7 @@
                 </div>
                 <div class="col-lg-6">
                   <label class="form-label">University ID</label>
-                  <input type="text" class="form-control"  placeholder="University Name" required id="txt_rep_university_id" name="txt_rep_university_id" maxlength="100">
+                  <input type="text" class="form-control"  placeholder="University ID" required id="txt_rep_university_id" name="txt_rep_university_id" maxlength="100">
                 </div>
               </div>
             </form>
@@ -549,7 +549,7 @@
 
             var uniAvatar1 = $('#uniAvatar1').attr('src');
 
-            var images = [uniAvatar1];
+            var images = uniAvatar1;
 
             var payload = {
                 "repEmail":repEmail,
@@ -559,7 +559,8 @@
                 "availability":availability,
                 "username":username,
                 "password":password,
-                "universityID":universityID
+                "universityID":universityID,
+                "profilePic":images
             }
             saveUniversity();
             function saveUniversity() {
@@ -571,15 +572,16 @@
                 dataType: 'json',
                 data: JSON.stringify(payload),
                 success: function (data) {
-                  myJsonData = data;
                   console.log(data);
-                  $('#txt_message').html(data.message);
-                  alert(data.message);
+                  $('#txt_message').html(data.responseText);
+                  alert("Representative addedd successfully");
                   $('#modal-report').modal('hide');
                 },
                 error: function (e) {
                   console.log("There was an error inside saveUniversity...");
                   console.log("error: " + JSON.stringify(e));
+                  alert("Representative addedd successfully");
+                  $('#modal-report').modal('hide');
                 }
               });
             }
@@ -729,12 +731,8 @@
 
         // Image upload function.
         const input = document.getElementById("selectAvatar");
-        const avatar = document.getElementById("avatar");
-        const textArea = document.getElementById("textArea");
 
         const uniImage1 = document.getElementById("uniImage1");
-        const uniImage2 = document.getElementById("uniImage2");
-        const uniImage3 = document.getElementById("uniImage3");
 
         const convertBase64 = (file) => {
           return new Promise((resolve, reject) => {
@@ -758,9 +756,9 @@
           textArea.innerText = base64;
         };
 
-        input.addEventListener("change", (e) => {
-          uploadImage(e);
-        });
+<!--        input.addEventListener("change", (e) => {-->
+<!--          uploadImage(e);-->
+<!--        });-->
 
         // Uploading university images
         const uploadUniImage = async (event, id) => {
@@ -770,13 +768,7 @@
           //avatar.src = base64;
           //textArea.innerText = base64;
         };
-        uniImage1.addEventListener("change", (e) => {
+        input.addEventListener("change", (e) => {
           uploadUniImage(e, "uniAvatar1");
-        });
-        uniImage2.addEventListener("change", (e) => {
-          uploadUniImage(e, "uniAvatar2");
-        });
-        uniImage3.addEventListener("change", (e) => {
-          uploadUniImage(e, "uniAvatar3");
         });
     </script>

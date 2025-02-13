@@ -5,6 +5,7 @@ import com.api.university.entity.RepresentativeEntity;
 import com.api.university.model.LoginModel;
 import com.api.university.model.RepresentativeModel;
 import com.api.university.service.RepresentativeService;
+import com.api.university.utils.ImageUploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class RepresentativeController {
 
     @Autowired
     RepresentativeService representativeService;
+
+    @Autowired
+    ImageUploadUtils imageUploadUtils;
 
     @GetMapping("/representativeDetails")
     public String universityDetails(HttpSession httpSession, Model model, RedirectAttributes redir) {
@@ -68,8 +72,12 @@ public class RepresentativeController {
     @PostMapping("/addRepresentative")
     @ResponseBody
     public ResponseEntity addRepresentative(@RequestBody RepresentativeModel representativeModel){
+        String imgUrl = "";
+        if(representativeModel.getProfilePic()!=null){
+            imgUrl = imageUploadUtils.uploadImageToImgBB(representativeModel.getProfilePic().split("base64,")[1]);
+        }
         representativeService.createRepresentative(representativeModel.getRepName(), representativeModel.getRepEmail(), representativeModel.getRepMobile(),
-                representativeModel.getProfilePic(), representativeModel.getUsername(), representativeModel.getPassword(), representativeModel.getUniversityID(),
+                imgUrl, representativeModel.getUsername(), representativeModel.getPassword(), representativeModel.getUniversityID(),
                 representativeModel.getAvailability());
         return ResponseEntity.ok("Representative added successfully");
     }
