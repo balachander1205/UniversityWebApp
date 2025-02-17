@@ -81,4 +81,13 @@ public class RepresentativeController {
                 representativeModel.getAvailability());
         return ResponseEntity.ok("Representative added successfully");
     }
+
+    @PostMapping("/updateRepresentative")
+    @ResponseBody
+    public ResponseEntity updateRepresentative(@RequestBody RepresentativeModel representativeModel){
+        representativeService.updateRepresentative(representativeModel.getRepName(), representativeModel.getRepEmail(), representativeModel.getRepMobile(),
+                representativeModel.getUsername(), representativeModel.getPassword(), representativeModel.getUniversityID(),
+                representativeModel.getAvailability(), representativeModel.getId());
+        return ResponseEntity.ok("Representative updated successfully");
+    }
 }

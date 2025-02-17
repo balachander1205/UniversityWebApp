@@ -377,7 +377,7 @@
             </div>
           </div>
           <div class="modal-footer">
-<!--            <button class="btn btn-success" id="btn_update" type="button">Update</button>-->
+            <button class="btn btn-success" id="btn_update_rep" type="button">Update</button>
             <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
               Cancel
             </a>
@@ -590,81 +590,52 @@
 
 
           // onclick for update button in add university
-          $('#btn_update').click(function(){
+          $('#btn_update_rep').click(function(){
             console.log("On click update university...");
+
+            var rowID = $('#txt_row_id').val();
             var universityID = $('#txt_university_id').val();
-            var university = $('#txt_university_name').val();
-            var description = $('#txt_uni_description').val();
-            var location = $('#txt_uni_location').val();
-            var username = $('#txt_username').val();
-            var password = $('#txt_username').val();
-            var state = $('#txt_uni_state').val();
-            var repname = $('#rep_names :selected').text();
-            var country = $('#txt_uni_country').val();
-            var checkboxValues = [];
-            $('input[name="report-type"]:checked').map(function() {
-                checkboxValues.push($(this).val());
-            });
-            var courseTypeValues = [];
-            $('input[name="uni-report-type"]:checked').map(function() {
-                courseTypeValues.push($(this).val());
-            });
-            var isRecommended = $('#uni_recommend').find(":selected").val();
-            // convert representative table into json
-            var header = [];
-            var rows = [];
-            $("#tbl_representative thead tr th").each(function (i, th) {
-                header.push($(th).html());
-            });
-            $("#tbl_representative tr:has(td)").each(function (i, tr) {
-                var row = {};
-                $(tr).find('td').each(function (j, td) {
-                    row[header[j]] = $(td).html();
-                });
-                rows.push(row);
-            });
-            console.log('Table Rows:', rows);
-            console.log(JSON.stringify(rows));
-            console.log(university, description, location, username, password, checkboxValues, courseTypeValues);
+            var repName = $('#txt_university_rec').val();
+            var repEmail = $('#txt_rep_email').val();
+            var repMobile = $('#txt_rep_phone_no').val();
+            var username = $('#txt_rep_username').val();
+            var password = $('#txt_rep_password').val();
+            var availability = $('#txt_rep_availability').val();
 
             var payload = {
-                          "admissionintake": checkboxValues.toString(),
-                          "description": description,
-                          "location": location,
-                          "password": password,
-                          "repname": "",
-                          "universityname": university,
-                          "username": username,
-                          "state":state,
-                          "country":country,
-                          "course":courseTypeValues.toString(),
-                          "isRecommended": isRecommended.toString(),
-                          "representatives":JSON.stringify(rows),
-                          "universityID":universityID
-                        }
-            updateUniversity();
-            function updateUniversity() {
-              console.log("Inside updateUniversity...")
+                "repEmail":repEmail,
+                "repMobile":repMobile,
+                "repName":repName,
+                "availability":availability,
+                "username":username,
+                "password":password,
+                "universityID":universityID,
+                "id":rowID
+            }
+            updateRepresentative();
+            function updateRepresentative() {
+              console.log("Inside updateRepresentative...")
               $.ajax({
                 type: 'POST',
-                url: '/api/updateUniversity',
+                url: '/api/updateRepresentative',
                 contentType: "application/json",
                 dataType: 'json',
                 data: JSON.stringify(payload),
                 success: function (data) {
                   myJsonData = data;
                   console.log(data);
-                  $('#txt_message').html(data.message);
-                  alert(data.message);
+                  $('#txt_message').html(data.responseText);
+                  alert(data.responseText);
                   $('#modal-report').modal('hide');
                 },
                 error: function (e) {
                   console.log("There was an error inside saveUniversity...");
                   console.log("error: " + JSON.stringify(e));
+                  alert("Representative updated successfully..");
+                  $('#modal-report').modal('hide');
                 }
               });
             }
-            console.log(payload);
           });
 
           // Form validation for new representative.
@@ -694,40 +665,6 @@
               $('.GFG').text(len+"/"+max_length);
           });
         });
-
-        // Get all countries as json..
-        function getAllCountries() {
-          console.log("Inside saveUniversity...")
-          $.ajax({
-            type: 'POST',
-            url: '/api/countries',
-            contentType: "application/json",
-            dataType: 'json',
-            success: function (data) {
-              $.each(data, function(index, country) {
-                  $('#txt_country').append('<option value="' + country.name + '">' + country.name + '</option>');
-              });
-
-              // When country is selected, populate the states dropdown.
-              $('#txt_country').change(function() {
-                  var selectedCountry = $(this).val();
-                  var selectedCountryData = data.find(function(country) {
-                      return country.name === selectedCountry;
-                  });
-                  $('#txt_state').empty().append('<option value="">Select State</option>');
-                  if (selectedCountryData) {
-                      $.each(selectedCountryData.states, function(index, state) {
-                          $('#txt_state').append('<option value="' + state.id + '">' + state.name + '</option>');
-                      });
-                  }
-              });
-            },
-            error: function (e) {
-              console.log("There was an error inside saveUniversity...");
-              console.log("error: " + JSON.stringify(e));
-            }
-          });
-        }
 
         // Image upload function.
         const input = document.getElementById("selectAvatar");

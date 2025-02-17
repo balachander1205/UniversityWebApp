@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RepresentativeServiceImpl implements RepresentativeService{
+public class RepresentativeServiceImpl implements RepresentativeService {
     @Autowired
     RepresentativeRepository representativeRepository;
 
-    public List<AppointmentsEntity> getRepresentativeAppointmentsByEmailID(String email){
+    public List<AppointmentsEntity> getRepresentativeAppointmentsByEmailID(String email) {
         return representativeRepository.getRepresentativeAppointmentsByEmailID(email);
     }
 
@@ -23,12 +23,12 @@ public class RepresentativeServiceImpl implements RepresentativeService{
     }
 
     public void createRepresentative(String repname, String email, String phonenumber,
-                                     String profilepic, String username, String password, String universityID, String availability){
+                                     String profilepic, String username, String password, String universityID, String availability) {
         representativeRepository.createRepresentative(repname, email, phonenumber,
                 profilepic, username, password, universityID, availability);
     }
 
-    public RepresentativeEntity getRepresentativeByUsername( String username){
+    public RepresentativeEntity getRepresentativeByUsername(String username) {
         return representativeRepository.getRepresentativeByUsername(username);
     }
 
@@ -40,5 +40,10 @@ public class RepresentativeServiceImpl implements RepresentativeService{
     @Override
     public List<RepresentativeEntity> getRepresentativeByUniversityId(String universityID) {
         return representativeRepository.getRepresentativeByUniversityId(universityID);
+    }
+
+    @Override
+    public void updateRepresentative(String repname, String email, String phonenumber, String username, String password, String universityid, String availability, int id) {
+        representativeRepository.updateRepresentative(repname, email, phonenumber, username, password, universityid, availability, id);
     }
 }
