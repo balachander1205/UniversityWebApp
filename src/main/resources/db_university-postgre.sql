@@ -132,3 +132,29 @@ INSERT INTO users (id, createddatetime, email, enabled, locked, mobile, password
 (5, '2024-05-02 21:43:55', 'balachander1205@gmail.com', '1', '0', '8919180283', '$2a$10$9Tk6MQGttWeAizvD52QlreneOYntv4MZxkCXnY7NQY5Hjnz4kqMQK', 'ADMIN', '2024-05-02 21:43:55', NULL, NULL);
 
 COMMIT;
+
+-- std_preferences table creation --
+CREATE TABLE std_preferences (
+  id INTEGER NOT NULL,
+  studentname varchar(100) DEFAULT NULL,
+  phonenumber varchar(20) DEFAULT NULL,
+  email varchar(100) DEFAULT NULL,
+  universityname varchar(500) DEFAULT NULL,
+  country varchar(500) DEFAULT NULL,
+  state varchar(500) DEFAULT NULL,
+  yearofplan varchar(500) DEFAULT NULL,
+  coursetype varchar(500) DEFAULT NULL,
+  createdatetime timestamp NULL DEFAULT NULL
+);
+
+CREATE SEQUENCE IF NOT EXISTS std_preferences_id_seq;
+
+SELECT SETVAL('std_preferences_id_seq', (
+  SELECT max(id) FROM std_preferences)
+);
+
+ALTER TABLE std_preferences
+ALTER COLUMN id
+SET DEFAULT nextval('std_preferences_id_seq'::regclass);
+
+ALTER SEQUENCE std_preferences_id_seq OWNED BY std_preferences.id;
