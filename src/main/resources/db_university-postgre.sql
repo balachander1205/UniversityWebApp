@@ -158,3 +158,30 @@ ALTER COLUMN id
 SET DEFAULT nextval('std_preferences_id_seq'::regclass);
 
 ALTER SEQUENCE std_preferences_id_seq OWNED BY std_preferences.id;
+
+-- representative table -----
+CREATE TABLE representative (
+  id INTEGER NOT NULL,
+  repname varchar(100) DEFAULT NULL,
+  email varchar(100) DEFAULT NULL,
+  phonenumber varchar(20) DEFAULT NULL,
+  profilepic varchar(500) DEFAULT NULL,
+  username varchar(500) DEFAULT NULL,
+  password varchar(500) DEFAULT NULL,
+  availability varchar(500) DEFAULT NULL,
+  universityid varchar(500) DEFAULT NULL
+);
+
+CREATE SEQUENCE IF NOT EXISTS representative_id_seq;
+
+SELECT SETVAL('representative_id_seq', (
+  SELECT max(id) FROM representative)
+);
+
+ALTER TABLE representative
+ALTER COLUMN id
+SET DEFAULT nextval('representative_id_seq'::regclass);
+
+ALTER SEQUENCE representative_id_seq OWNED BY representative.id;
+
+-- End of representative table -----
