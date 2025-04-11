@@ -43,7 +43,7 @@ CREATE TABLE university (
   username varchar(50) DEFAULT NULL,
   password varchar(50) DEFAULT NULL,
   state varchar(200) DEFAULT NULL,
-  countrycode varchar(5) DEFAULT NULL
+  countrycode varchar(200) DEFAULT NULL
 );
 
 CREATE TABLE users (
