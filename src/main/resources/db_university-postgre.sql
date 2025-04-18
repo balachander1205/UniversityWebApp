@@ -185,3 +185,26 @@ SET DEFAULT nextval('representative_id_seq'::regclass);
 ALTER SEQUENCE representative_id_seq OWNED BY representative.id;
 
 -- End of representative table -----
+
+-- Leaves Table Creation ----
+CREATE TABLE public.leaves (
+	id int8 DEFAULT nextval('leave_id_seq'::regclass) NOT NULL,
+	createdatetime timestamp NULL,
+	enddate varchar(255) NULL,
+	eventid varchar(255) NULL,
+	repemail varchar(255) NULL,
+	repid varchar(255) NULL,
+	startdate varchar(255) NULL,
+	title varchar(255) NULL,
+	CONSTRAINT leaves_pkey PRIMARY KEY (id)
+);
+
+CREATE SEQUENCE IF NOT EXISTS leave_id_seq;
+SELECT SETVAL('leave_id_seq', (
+  SELECT max(id) FROM leaves)
+);
+ALTER TABLE leaves
+ALTER COLUMN id
+SET DEFAULT nextval('leave_id_seq'::regclass);
+ALTER SEQUENCE leave_id_seq OWNED BY leaves.id;
+-- End of leaves table ------
