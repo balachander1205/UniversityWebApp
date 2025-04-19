@@ -23,9 +23,10 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     }
 
     public void createRepresentative(String repname, String email, String phonenumber,
-                                     String profilepic, String username, String password, String universityID, String availability) {
+                                     String profilepic, String username, String password, String universityID,
+                                     String availability, String zone) {
         representativeRepository.createRepresentative(repname, email, phonenumber,
-                profilepic, username, password, universityID, availability);
+                profilepic, username, password, universityID, availability, zone);
     }
 
     public RepresentativeEntity getRepresentativeByUsername(String username) {
@@ -43,7 +44,7 @@ public class RepresentativeServiceImpl implements RepresentativeService {
     }
 
     @Override
-    public void updateRepresentative(String repname, String email, String phonenumber, String username, String password, String universityid, String availability, int id) {
-        representativeRepository.updateRepresentative(repname, email, phonenumber, username, password, universityid, availability, id);
+    public void updateRepresentative(String repname, String email, String phonenumber, String username, String password, String universityid, String availability, int id, String zone) {
+        representativeRepository.updateRepresentative(repname, email, phonenumber, username, password, universityid, availability, id, zone);
     }
 }

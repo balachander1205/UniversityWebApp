@@ -36,6 +36,9 @@ public class RepresentativeEntity {
     @Column(name = "availability")
     private String availability;
 
+    @Column(name = "zone")
+    private String zone;
+
     @Column(name = "universityid")
     private String universityid;
 

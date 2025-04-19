@@ -78,7 +78,7 @@ public class RepresentativeController {
         }
         representativeService.createRepresentative(representativeModel.getRepName(), representativeModel.getRepEmail(), representativeModel.getRepMobile(),
                 imgUrl, representativeModel.getUsername(), representativeModel.getPassword(), representativeModel.getUniversityID(),
-                representativeModel.getAvailability());
+                representativeModel.getAvailability(), representativeModel.getZone());
         return ResponseEntity.ok("Representative added successfully");
     }
 
@@ -87,7 +87,7 @@ public class RepresentativeController {
     public ResponseEntity updateRepresentative(@RequestBody RepresentativeModel representativeModel){
         representativeService.updateRepresentative(representativeModel.getRepName(), representativeModel.getRepEmail(), representativeModel.getRepMobile(),
                 representativeModel.getUsername(), representativeModel.getPassword(), representativeModel.getUniversityID(),
-                representativeModel.getAvailability(), representativeModel.getId());
+                representativeModel.getAvailability(), representativeModel.getId(), representativeModel.getZone());
         return ResponseEntity.ok("Representative updated successfully");
     }
 }

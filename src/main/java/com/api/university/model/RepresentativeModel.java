@@ -16,5 +16,6 @@ public class RepresentativeModel {
     private String username;
     private String password;
     private String universityID;
+    private String zone;
     private int id;
 }

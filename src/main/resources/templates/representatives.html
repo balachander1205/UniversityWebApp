@@ -221,6 +221,7 @@
                         <th>Username</th>
                         <th>Password</th>
                         <th>Availability</th>
+                        <th>Zone</th>
                         <th>University ID</th>
                         <th></th>
                       </tr>
@@ -260,7 +261,7 @@
               <div class="row">
                 <div class="col-lg-4">
                   <label class="form-label">Profile Image</label>
-                  <input class="form-control" id="selectAvatar" name="selectAvatar" type="file"/>
+                  <input class="form-control" id="selectAvatar" name="selectAvatar" type="file" accept="image/png, image/jpeg"/>
                 </div>
               </div>
               <div class="row">
@@ -302,6 +303,16 @@
                   </select>
                 </div>
                 <div class="col-lg-6">
+                  <label class="form-label">Availability</label>
+                  <select class="form-select" id="rep_availability_zone" name="rep_availability_zone">
+                    <option value="AM" selected>AM</option>
+                    <option value="PM" selected>PM</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
                   <label class="form-label">University ID</label>
                   <input type="text" class="form-control"  placeholder="University ID" required id="txt_rep_university_id" name="txt_rep_university_id" maxlength="100">
                 </div>
@@ -370,9 +381,13 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-6">
                 <label class="form-label">Availability</label>
                 <input type="text" class="form-control"  placeholder="Location" id="txt_rep_availability">
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">Zone</label>
+                <input type="text" class="form-control"  placeholder="Location" id="txt_rep_availability_zone">
               </div>
             </div>
           </div>
@@ -439,6 +454,7 @@
                 university.username,
                 university.password,
                 university.availability,
+                university.zone,
                 university.universityid,
                 '<button class="btn btn-primary" id="btn-tr-view-data" data-bs-toggle="modal">View</button>'
               ]);
@@ -462,7 +478,8 @@
             var username = $tds[5].innerText;
             var password = $tds[6].innerText;
             var availability = $tds[7].innerText;
-            var universityID = $tds[8].innerText;
+            var zone = $tds[8].innerText;
+            var universityID = $tds[9].innerText;
 
             $('#img-rep-profile-pic').attr('src', repImage);
             $('#txt_row_id').val(rowID);
@@ -473,6 +490,7 @@
             $('#txt_rep_username').val(username);
             $('#txt_rep_password').val(password);
             $('#txt_rep_availability').val(availability);
+            $('#txt_rep_availability_zone').val(zone);
             $('#modal-report-university').modal('show');
           });
           // End of View Details button...
@@ -513,9 +531,10 @@
             var repPsd = $('#txt_rep_psd').val();
             var repPhone = $('#txt_rep_phone').val();
             var repAvailability = $('#rep_availability').find(":selected").val();
+            var repAvailabilityZone = $('#rep_availability_zone').find(":selected").val();
             var imageSrc = $('#textArea').val();
             console.log(imageSrc);
-            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><img id="img_profile_pic" src="'+imageSrc+'"></td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">-</button></div></td></tr>';
+            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td>'+repAvailabilityZone+'</td><td><img id="img_profile_pic" src="'+imageSrc+'"></td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">-</button></div></td></tr>';
             $('#tbl_representative').append(data_tr);
             $('#txt_rep_name').val('');
             $('#txt_rep_uname').val('');
@@ -546,6 +565,7 @@
             var username = $('#txt_rep_user_name').val();
             var password = $('#txt_rep_pswd').val();
             var availability = $('#rep_availability :selected').text();
+            var zone = $('#rep_availability_zone :selected').text();
             var universityID = $('#txt_rep_university_id').val();
 
             var uniAvatar1 = $('#uniAvatar1').attr('src');
@@ -561,7 +581,8 @@
                 "username":username,
                 "password":password,
                 "universityID":universityID,
-                "profilePic":images
+                "profilePic":images,
+                "zone":zone
             }
             saveUniversity();
             function saveUniversity() {
@@ -602,6 +623,7 @@
             var username = $('#txt_rep_username').val();
             var password = $('#txt_rep_password').val();
             var availability = $('#txt_rep_availability').val();
+            var zone = $('#txt_rep_availability_zone').val();
 
             var payload = {
                 "repEmail":repEmail,
@@ -611,7 +633,8 @@
                 "username":username,
                 "password":password,
                 "universityID":universityID,
-                "id":rowID
+                "id":rowID,
+                "zone":zone
             }
             updateRepresentative();
             function updateRepresentative() {

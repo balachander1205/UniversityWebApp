@@ -101,6 +101,7 @@ public class UniversityController {
     @PostMapping("/addUniversity")
     public ResponseEntity addUniversity(@RequestBody UniversityModel universityModel){
         UniversityResponseModel universityResponseModel = new UniversityResponseModel();
+        log.info("universityModel={}",universityModel.toString());
         try {
             long currentTS = System.currentTimeMillis();
             String universityID = String.valueOf(currentTS);
@@ -112,7 +113,7 @@ public class UniversityController {
                 });
             }
             universityService.insertUniversity(universityModel.getUniversityname(), universityModel.getDescription(),
-                    universityModel.getLocation(), universityModel.getRepname(), universityModel.getRepname(),
+                    universityModel.getCountry(), universityModel.getRepname(), universityModel.getRepname(),
                     universityModel.getAdmissionintake(), universityModel.getUsername(), universityModel.getPassword(), universityModel.getState(), Arrays.toString(images.toArray()).replaceAll("\\[|\\]", ""),
                     universityModel.getCourse(), universityModel.getIsRecommended(), universityID, universityModel.getCountry());
             if (universityModel.getRepresentatives() != null && universityModel.getRepresentatives().length() > 0) {
@@ -126,7 +127,9 @@ public class UniversityController {
                     String src = htmlParserUtil.getImageSrc(image).split("base64,")[1];
                     String imgUrl = imageUploadUtils.uploadImageToImgBB(src);
                     representativeService.createRepresentative(jsonObject.getString("repName"), jsonObject.getString("username"),
-                            jsonObject.getString("phonenumber"), (imgUrl != null ? imgUrl : "https://cdn-icons-png.flaticon.com/512/4042/4042171.png"), jsonObject.getString("username"), jsonObject.getString("password"), universityID, jsonObject.getString("availability"));
+                            jsonObject.getString("phonenumber"), (imgUrl != null ? imgUrl : "https://cdn-icons-png.flaticon.com/512/4042/4042171.png"),
+                            jsonObject.getString("username"), jsonObject.getString("password"), universityID, jsonObject.getString("availability"),
+                            jsonObject.getString("zone"));
                 }
             }
             List<UniversityEntity> allUniversities = universityService.getAllUniversities();

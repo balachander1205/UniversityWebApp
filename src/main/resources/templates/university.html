@@ -441,7 +441,7 @@
                     <label class="form-label">Password</label>
                     <input type="password" class="form-control"  placeholder="Password" id="txt_rep_psd" name="txt_rep_psd" maxlength="10">
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-lg-2">
                     <label class="form-label">Availability</label>
                     <select class="form-select" id="rep_availability" name="rep_availability">
                       <option value="8:00-5:00" selected>8:00-5:00</option>
@@ -451,15 +451,19 @@
                       <option value="10:00-7:00" selected>10:00-7:00</option>
                     </select>
                   </div>
+                  <div class="col-lg-2">
+                    <label class="form-label">Zone</label>
+                    <select class="form-select" id="rep_availability_zone" name="rep_availability_zone">
+                      <option value="AM" selected>AM</option>
+                      <option value="PM" selected>PM</option>
+                    </select>
+                  </div>
 
                   <div class="col-lg-4">
                     <label class="form-label">Profile Picture</label>
                     <input class="form-control" id="selectAvatar" name="selectAvatar" type="file"/>
                   </div>
-    <!--              <div class="col-lg-3">-->
-    <!--                <label class="form-label">Phone Number</label>-->
-    <!--                <input type="password" class="form-control"  placeholder="Password" id="txt_rep_availability">-->
-    <!--              </div>-->
+
                   <div class="col-lg-4">
                     <label class="form-label"></label>
                     <img class="img" id="avatar" />
@@ -485,6 +489,7 @@
                       <th>password</th>
                       <th>phonenumber</th>
                       <th>availability</th>
+                      <th>zone</th>
                       <th>image</th>
                       <th>Info</th>
                     </tr>
@@ -696,6 +701,7 @@
 <!--                    <th>password</th>-->
                     <th>phonenumber</th>
                     <th>availability</th>
+                    <th>zone</th>
                     <th>Image</th>
                   </tr>
                   </thead>
@@ -880,9 +886,10 @@
             var repPsd = $('#txt_rep_psd').val();
             var repPhone = $('#txt_rep_phone').val();
             var repAvailability = $('#rep_availability').find(":selected").val();
+            var repAvailabilityZone = $('#rep_availability_zone').find(":selected").val();
             var imageSrc = $('#textArea').val();
             console.log(imageSrc);
-            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td><img id="img_profile_pic" src="'+imageSrc+'"></td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">-</button></div></td></tr>';
+            var data_tr = '<tr><td>'+repName+'</td><td>'+repUserName+'</td><td>'+repPsd+'</td><td>'+repPhone+'</td><td>'+repAvailability+'</td><td>'+repAvailabilityZone+'</td><td><img id="img_profile_pic" src="'+imageSrc+'"></td><td><div class="col-lg-3"><button class="btn btn-danger" id="btn_remove_rep">-</button></div></td></tr>';
             $('#tbl_representative').append(data_tr);
             $('#txt_rep_name').val('');
             $('#txt_rep_uname').val('');
